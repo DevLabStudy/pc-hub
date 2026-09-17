@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% if page.title %}{{ page.title }} | {% endif %}{{ site.title }}</title>
+  <meta name="description" content="{{ page.description | default: site.description }}">
+  
+  <!-- Tailwind CSS do szybkiego stylowania -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    /* Opcjonalne własne akcenty wizualne */
+    body {
+      background-color: #0f172a;
+      color: #f8fafc;
+    }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col font-sans antialiased selection:bg-cyan-500 selection:text-white">
+
+  <!-- Nawigacja / Header -->
+  <header class="border-b border-slate-800 bg-slate-900/80 backdrop-blur sticky top-0 z-50">
+    <div class="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
+      <a href="/" class="text-xl font-bold tracking-wider text-cyan-400 hover:text-cyan-300 transition">
+        PC HUB <span class="text-xs text-slate-400 font-normal">by DevLabStudy</span>
+      </a>
+      <nav class="flex gap-6 text-sm font-medium text-slate-300">
+        <a href="#uslugi" class="hover:text-cyan-400 transition">Usługi</a>
+        <a href="#projekty" class="hover:text-cyan-400 transition">Realizacje</a>
+        <a href="#kontakt" class="hover:text-cyan-400 transition">Kontakt</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Główna treść podmieniająca się z plików .html / .md -->
+  <main class="flex-grow">
+    {{ content }}
+  </main>
+
+  <!-- Stopka / Footer -->
+  <footer class="border-t border-slate-800 bg-slate-950 py-8 text-center text-xs text-slate-500">
+    <div class="max-w-6xl mx-auto px-4 flex flex-col md:flex-row justify-between items-center gap-4">
+      <p>&copy; {{ 'now' | date: "%Y" }} PC HUB. Wszelkie prawa zastrzeżone.</p>
+      <p class="text-slate-400">Część infrastruktury <a href="https://devlabstudy.ovh" class="text-cyan-500 hover:underline">DevLabStudy</a></p>
+    </div>
+  </footer>
+
+</body>
+</html>
