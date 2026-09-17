@@ -6,6 +6,48 @@
   <title>{% if page.title %}{{ page.title }} | {% endif %}{{ site.title }}</title>
   <meta name="description" content="{{ page.description | default: site.description }}">
   
+  <!-- Favicon ze ścieżki w assets -->
+  <link rel="icon" type="image/png" href="{{ '/assets/img/logo.png' | relative_url }}">
+  
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body {
+      background-color: #0b0e14;
+      color: #f8fafc;
+    }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col font-sans antialiased selection:bg-amber-500 selection:text-black">
+
+  <!-- Header -->
+  <header class="border-b border-slate-800 bg-slate-950/90 backdrop-blur sticky top-0 z-50">
+    <div class="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
+      
+      <!-- Brand & Logo -->
+      <a href="{{ '/' | relative_url }}" class="flex items-center gap-3 group">
+        <img src="{{ '/assets/img/logo.png' | relative_url }}" alt="PC HUB Logo" class="w-9 h-9 rounded-full border border-slate-700 group-hover:border-amber-500 transition object-cover">
+        <div class="flex flex-col">
+          <span class="text-lg font-black tracking-tight text-white flex items-center gap-1">
+            PC <span class="bg-amber-500 text-black px-1.5 py-0.5 rounded font-bold text-xs">HUB</span>
+          </span>
+          <span class="text-[10px] text-slate-400 -mt-1 font-mono">by DevLabStudy</span>
+        </div>
+      </a>
+
+      <!-- Nawigacja -->
+      <nav class="flex gap-6 text-sm font-medium text-slate-300">
+        <a href="#projekty" class="hover:text-amber-500 transition">Buildy</a>
+        <a href="#o-projekcie" class="hover:text-amber-500 transition">O marce</a>
+      </nav>
+    </div>
+  </header><!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% if page.title %}{{ page.title }} | {% endif %}{{ site.title }}</title>
+  <meta name="description" content="{{ page.description | default: site.description }}">
+  
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
     body {
