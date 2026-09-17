@@ -6,8 +6,8 @@
   <title>{% if page.title %}{{ page.title }} | {% endif %}{{ site.title }}</title>
   <meta name="description" content="{{ page.description | default: site.description }}">
   
-  <!-- Favicon ze ścieżki w assets -->
-  <link rel="icon" type="image/png" href="{{ '/assets/img/logo.png' | relative_url }}">
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="/assets/img/logo.png">
   
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
@@ -24,8 +24,8 @@
     <div class="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
       
       <!-- Brand & Logo -->
-      <a href="{{ '/' | relative_url }}" class="flex items-center gap-3 group">
-        <img src="{{ '/assets/img/logo.png' | relative_url }}" alt="PC HUB Logo" class="w-9 h-9 rounded-full border border-slate-700 group-hover:border-amber-500 transition object-cover">
+      <a href="/" class="flex items-center gap-3 group">
+        <img src="/assets/img/logo.png" alt="Logo PC HUB" class="w-9 h-9 rounded-full border border-slate-700 group-hover:border-amber-500 transition object-cover bg-black">
         <div class="flex flex-col">
           <span class="text-lg font-black tracking-tight text-white flex items-center gap-1">
             PC <span class="bg-amber-500 text-black px-1.5 py-0.5 rounded font-bold text-xs">HUB</span>
@@ -41,3 +41,19 @@
       </nav>
     </div>
   </header>
+
+  <!-- Główna treść z index.html -->
+  <main class="flex-grow">
+    {{ content }}
+  </main>
+
+  <!-- Footer -->
+  <footer class="border-t border-slate-800 bg-black py-8 text-center text-xs text-slate-500">
+    <div class="max-w-6xl mx-auto px-4 flex flex-col md:flex-row justify-between items-center gap-4">
+      <p>&copy; {{ 'now' | date: "%Y" }} PC HUB. Wszystkie prawa zastrzeżone.</p>
+      <p class="text-slate-400">Część ekosystemu <a href="https://devlabstudy.ovh" class="text-amber-500 hover:underline">DevLabStudy</a></p>
+    </div>
+  </footer>
+
+</body>
+</html>
