@@ -1,0 +1,8 @@
+title: PC HUB
+email: pc-hub@devlabstudy.ovh
+description: Hardware & Custom Assembly by DevLabStudy
+url: "https://pc-hub.devlabstudy.ovh"
+baseurl: ""
+
+include:
+  - assets
