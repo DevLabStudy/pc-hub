@@ -3,6 +3,45 @@ layout: default
 title: Główna
 ---
 
+<!-- Cookie Consent CSS & JS z CDN -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orestbida/cookieconsent@v2.9.2/dist/cookieconsent.css">
+<script defer src="https://cdn.jsdelivr.net/gh/orestbida/cookieconsent@v2.9.2/dist/cookieconsent.js"></script>
+
+<style>
+  /* Personalizacja motywu Cookie Consent pod styl PC HUB (Czarno-Pomarańczowy) */
+  #cc--main {
+    --cc-bg: #0d0d0d;
+    --cc-text: #f3f4f6;
+    --cc-btn-primary-bg: #f59e0b;
+    --cc-btn-primary-text: #000000;
+    --cc-btn-primary-hover-bg: #d97706;
+    --cc-btn-secondary-bg: #1c1917;
+    --cc-btn-secondary-text: #f3f4f6;
+    --cc-btn-secondary-hover-bg: #292524;
+    --cc-cookie-category-title-color: #f59e0b;
+    font-family: ui-sans-serif, system-ui, sans-serif !important;
+  }
+
+  .pchub-footer {
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 2rem 1rem;
+    text-align: center;
+    font-size: 0.875rem;
+    color: #9ca3af;
+  }
+
+  .pchub-footer a {
+    color: #d1d5db;
+    text-decoration: none;
+    margin: 0 0.5rem;
+    transition: color 0.2s ease;
+  }
+
+  .pchub-footer a:hover {
+    color: #f59e0b;
+  }
+</style>
+
 <section class="py-20 text-center px-4 max-w-4xl mx-auto">
   <span class="text-xs font-bold uppercase tracking-widest text-amber-500 bg-amber-950/40 px-3 py-1 rounded-full border border-amber-500/30">
     Hardware & Custom Assembly
@@ -14,3 +53,51 @@ title: Główna
     Niezależny projekt sprzętowy. Składanie, optymalizacja termiczna i dokumentacja unikalnych zestawów komputerowych.
   </p>
 </section>
+
+<!-- Footer z linkami do RODO/Cookies -->
+<footer class="pchub-footer">
+  <p>
+    © PC HUB | 
+    <a href="https://devlabstudy.ovh/polityka-prywatnosci">Polityka Prywatności</a> | 
+    <a href="#" data-cc="c-settings">Ustawienia Cookies</a>
+  </p>
+</footer>
+
+<!-- Skrypt inicjalizujący Baner CookieConsent -->
+<script>
+  window.addEventListener('load', function () {
+    var cc = initCookieConsent();
+
+    cc.run({
+      current_lang: 'pl',
+      autoclear_cookies: true,
+      page_scripts: true,
+
+      gui_options: {
+        consent_modal: {
+          layout: 'cloud',
+          position: 'bottom center',
+          transition: 'slide',
+          swap_buttons: false
+        }
+      },
+
+      languages: {
+        'pl': {
+          consent_modal: {
+            title: 'Strona używa plików cookie 🍪',
+            description: 'Używamy plików cookie w celu prawidłowego działania witryny oraz multimediów. Więcej dowiesz się w naszej <a href="https://devlabstudy.ovh/polityka-prywatnosci">Polityce Prywatności</a>.',
+            primary_btn: {
+              text: 'Akceptuję',
+              role: 'accept_all'
+            },
+            secondary_btn: {
+              text: 'Tylko niezbędne',
+              role: 'accept_necessary'
+            }
+          }
+        }
+      }
+    });
+  });
+</script>
