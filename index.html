@@ -3,25 +3,7 @@ layout: default
 title: Główna
 ---
 
-<!-- Cookie Consent CSS & JS z CDN -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orestbida/cookieconsent@v2.9.2/dist/cookieconsent.css">
-<script defer src="https://cdn.jsdelivr.net/gh/orestbida/cookieconsent@v2.9.2/dist/cookieconsent.js"></script>
-
 <style>
-  /* Personalizacja motywu Cookie Consent pod styl PC HUB (Czarno-Pomarańczowy) */
-  #cc--main {
-    --cc-bg: #0d0d0d;
-    --cc-text: #f3f4f6;
-    --cc-btn-primary-bg: #f59e0b;
-    --cc-btn-primary-text: #000000;
-    --cc-btn-primary-hover-bg: #d97706;
-    --cc-btn-secondary-bg: #1c1917;
-    --cc-btn-secondary-text: #f3f4f6;
-    --cc-btn-secondary-hover-bg: #292524;
-    --cc-cookie-category-title-color: #f59e0b;
-    font-family: ui-sans-serif, system-ui, sans-serif !important;
-  }
-
   .pchub-footer {
     border-top: 1px solid rgba(255, 255, 255, 0.1);
     padding: 2rem 1rem;
@@ -39,6 +21,82 @@ title: Główna
 
   .pchub-footer a:hover {
     color: #f59e0b;
+  }
+
+  /* Natywny Baner Cookies - Styl PC HUB */
+  #cookie-banner {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: calc(100% - 40px);
+    max-width: 580px;
+    background-color: #0d0d0d;
+    border: 1px solid #262626;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.9);
+    z-index: 999999;
+    display: none;
+    font-family: ui-sans-serif, system-ui, sans-serif;
+    color: #f3f4f6;
+  }
+
+  .cookie-title {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: #f3f4f6;
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .cookie-content {
+    font-size: 0.85rem;
+    line-height: 1.5;
+    color: #9ca3af;
+    margin-bottom: 16px;
+  }
+
+  .cookie-content a {
+    color: #f59e0b;
+    text-decoration: underline;
+  }
+
+  .cookie-actions {
+    display: flex;
+    gap: 10px;
+    justify-content: flex-end;
+  }
+
+  .cookie-btn {
+    padding: 8px 16px;
+    border-radius: 6px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    cursor: pointer;
+    border: none;
+    transition: all 0.2s ease;
+  }
+
+  .cookie-btn-accept {
+    background-color: #f59e0b;
+    color: #000;
+  }
+
+  .cookie-btn-accept:hover {
+    background-color: #d97706;
+  }
+
+  .cookie-btn-reject {
+    background-color: #1c1917;
+    color: #f3f4f6;
+    border: 1px solid #292524;
+  }
+
+  .cookie-btn-reject:hover {
+    background-color: #292524;
   }
 </style>
 
@@ -59,45 +117,39 @@ title: Główna
   <p>
     © PC HUB | 
     <a href="https://devlabstudy.ovh/polityka-prywatnosci">Polityka Prywatności</a> | 
-    <a href="#" data-cc="c-settings">Ustawienia Cookies</a>
+    <a href="#" onclick="openCookieSettings(event)">Ustawienia Cookies</a>
   </p>
 </footer>
 
-<!-- Skrypt inicjalizujący Baner CookieConsent -->
+<!-- Baner Cookie -->
+<div id="cookie-banner">
+  <div class="cookie-title">🍪 Strona używa plików cookie</div>
+  <div class="cookie-content">
+    Używamy plików cookie w celu zapewnienia prawidłowego działania witryny oraz multimediów. Więcej szczegółów znajdziesz w naszej <a href="https://devlabstudy.ovh/polityka-prywatnosci">Polityce Prywatności</a>.
+  </div>
+  <div class="cookie-actions">
+    <button class="cookie-btn cookie-btn-reject" onclick="setCookieConsent('necessary')">Tylko niezbędne</button>
+    <button class="cookie-btn cookie-btn-accept" onclick="setCookieConsent('all')">Akceptuję</button>
+  </div>
+</div>
+
 <script>
-  window.addEventListener('load', function () {
-    var cc = initCookieConsent();
+  function checkCookieConsent() {
+    var consent = localStorage.getItem('devlab_cookie_consent');
+    if (!consent) {
+      document.getElementById('cookie-banner').style.display = 'block';
+    }
+  }
 
-    cc.run({
-      current_lang: 'pl',
-      autoclear_cookies: true,
-      page_scripts: true,
+  function setCookieConsent(type) {
+    localStorage.setItem('devlab_cookie_consent', type);
+    document.getElementById('cookie-banner').style.display = 'none';
+  }
 
-      gui_options: {
-        consent_modal: {
-          layout: 'cloud',
-          position: 'bottom center',
-          transition: 'slide',
-          swap_buttons: false
-        }
-      },
+  function openCookieSettings(e) {
+    if (e) e.preventDefault();
+    document.getElementById('cookie-banner').style.display = 'block';
+  }
 
-      languages: {
-        'pl': {
-          consent_modal: {
-            title: 'Strona używa plików cookie 🍪',
-            description: 'Używamy plików cookie w celu prawidłowego działania witryny oraz multimediów. Więcej dowiesz się w naszej <a href="https://devlabstudy.ovh/polityka-prywatnosci">Polityce Prywatności</a>.',
-            primary_btn: {
-              text: 'Akceptuję',
-              role: 'accept_all'
-            },
-            secondary_btn: {
-              text: 'Tylko niezbędne',
-              role: 'accept_necessary'
-            }
-          }
-        }
-      }
-    });
-  });
+  document.addEventListener('DOMContentLoaded', checkCookieConsent);
 </script>
