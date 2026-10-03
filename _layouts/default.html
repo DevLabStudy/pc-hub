@@ -19,9 +19,9 @@
 </head>
 <body class="min-h-screen flex flex-col font-sans antialiased selection:bg-amber-500 selection:text-black">
 
-  <!-- Header -->
+  <!-- Header (Pełna szerokość dopasowana do reszty) -->
   <header class="border-b border-slate-800 bg-slate-950/90 backdrop-blur sticky top-0 z-50">
-    <div class="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
+    <div style="max-width: 100% !important; padding-left: 60px !important; padding-right: 60px !important;" class="mx-auto h-16 flex items-center justify-between">
       
       <!-- Brand & Logo -->
       <a href="/" class="flex items-center gap-3 group">
@@ -49,7 +49,7 @@
 
   <!-- Footer -->
   <footer class="border-t border-slate-800 bg-black py-8 text-center text-xs text-slate-500">
-    <div class="max-w-6xl mx-auto px-4 flex flex-col md:flex-row justify-between items-center gap-4">
+    <div style="max-width: 100% !important; padding-left: 60px !important; padding-right: 60px !important;" class="mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
       <p>&copy; {{ 'now' | date: "%Y" }} PC HUB. Wszystkie prawa zastrzeżone.</p>
       <p class="text-slate-400">Część ekosystemu <a href="https://devlabstudy.ovh" class="text-amber-500 hover:underline">DevLabStudy</a></p>
     </div>
