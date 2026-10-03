@@ -1,155 +1,292 @@
 ---
 layout: default
-title: Główna
+title: PC Hub | Hardware & Custom Assembly
 ---
-
 <style>
-  .pchub-footer {
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
-    padding: 2rem 1rem;
-    text-align: center;
-    font-size: 0.875rem;
-    color: #9ca3af;
-  }
+    /* PEŁNA SZEROKOŚĆ KONTENERA */
+    .dashboard {
+        max-width: 100% !important;
+        padding-left: 60px !important;
+        padding-right: 60px !important;
+    }
 
-  .pchub-footer a {
-    color: #d1d5db;
-    text-decoration: none;
-    margin: 0 0.5rem;
-    transition: color 0.2s ease;
-  }
+    /* HERO SECTION DLA PC HUB */
+    .pchub-hero {
+        text-align: center;
+        max-width: 900px;
+        margin: 40px auto 70px auto;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
 
-  .pchub-footer a:hover {
-    color: #f59e0b;
-  }
+    .pchub-badge {
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 0.75rem;
+        background: rgba(255, 165, 0, 0.1);
+        color: #ff9900;
+        padding: 6px 14px;
+        border-radius: 20px;
+        border: 1px solid rgba(255, 165, 0, 0.3);
+        font-weight: 800;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        margin-bottom: 20px;
+        display: inline-block;
+    }
 
-  /* Natywny Baner Cookies - Styl PC HUB */
-  #cookie-banner {
-    position: fixed;
-    bottom: 20px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: calc(100% - 40px);
-    max-width: 580px;
-    background-color: #0d0d0d;
-    border: 1px solid #262626;
-    border-radius: 12px;
-    padding: 20px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.9);
-    z-index: 999999;
-    display: none;
-    font-family: ui-sans-serif, system-ui, sans-serif;
-    color: #f3f4f6;
-  }
+    .pchub-title {
+        font-size: 4rem;
+        font-weight: 900;
+        margin: 0 0 20px 0;
+        letter-spacing: -2px;
+        font-family: 'JetBrains Mono', monospace;
+        color: #fff;
+    }
+    .pchub-title span {
+        color: #ff9900;
+    }
 
-  .cookie-title {
-    font-size: 0.95rem;
-    font-weight: 700;
-    color: #f3f4f6;
-    margin-bottom: 8px;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
+    .pchub-desc {
+        color: var(--text-muted);
+        font-size: 1.15rem;
+        line-height: 1.8;
+        margin-bottom: 35px;
+    }
 
-  .cookie-content {
-    font-size: 0.85rem;
-    line-height: 1.5;
-    color: #9ca3af;
-    margin-bottom: 16px;
-  }
+    /* SEKCJA PROJEKTÓW / BUILDS GRID */
+    .builds-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+        gap: 25px;
+        margin-bottom: 70px;
+    }
 
-  .cookie-content a {
-    color: #f59e0b;
-    text-decoration: underline;
-  }
+    .build-card {
+        background: var(--card-bg);
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        padding: 30px;
+        backdrop-filter: blur(10px);
+        position: relative;
+        overflow: hidden;
+        transition: 0.3s;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+    .build-card::before {
+        content: '';
+        position: absolute;
+        top: 0; left: 0; width: 4px; height: 100%;
+        background: #ff9900;
+    }
+    .build-card:hover {
+        border-color: #ff9900;
+        transform: translateY(-3px);
+        background: rgba(10, 15, 25, 0.85);
+    }
 
-  .cookie-actions {
-    display: flex;
-    gap: 10px;
-    justify-content: flex-end;
-  }
+    .build-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        margin-bottom: 15px;
+    }
+    .build-name {
+        font-size: 1.25rem;
+        font-weight: 900;
+        color: #fff;
+        font-family: 'JetBrains Mono', monospace;
+    }
+    .build-tag {
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 0.68rem;
+        background: rgba(0, 210, 255, 0.1);
+        color: var(--accent-blue);
+        padding: 4px 10px;
+        border-radius: 20px;
+        border: 1px solid rgba(0, 210, 255, 0.2);
+        font-weight: 700;
+        text-transform: uppercase;
+    }
 
-  .cookie-btn {
-    padding: 8px 16px;
-    border-radius: 6px;
-    font-size: 0.8rem;
-    font-weight: 600;
-    cursor: pointer;
-    border: none;
-    transition: all 0.2s ease;
-  }
+    .build-specs {
+        list-style: none;
+        padding: 0;
+        margin: 15px 0 25px 0;
+        color: var(--text-muted);
+        font-size: 0.88rem;
+        line-height: 1.7;
+    }
+    .build-specs li {
+        display: flex;
+        justify-content: space-between;
+        border-bottom: 1px dashed rgba(255, 255, 255, 0.05);
+        padding: 5px 0;
+    }
+    .build-specs li span:last-child {
+        color: var(--text-main);
+        font-family: 'JetBrains Mono', monospace;
+        font-weight: 600;
+        font-size: 0.82rem;
+    }
 
-  .cookie-btn-accept {
-    background-color: #f59e0b;
-    color: #000;
-  }
+    .build-footer {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-top: 1px dashed rgba(255, 255, 255, 0.06);
+        padding-top: 15px;
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 0.78rem;
+        color: var(--text-muted);
+    }
+    .build-link {
+        color: #ff9900;
+        font-weight: 700;
+        text-decoration: none;
+        transition: 0.2s;
+    }
+    .build-link:hover {
+        text-decoration: underline;
+    }
 
-  .cookie-btn-accept:hover {
-    background-color: #d97706;
-  }
-
-  .cookie-btn-reject {
-    background-color: #1c1917;
-    color: #f3f4f6;
-    border: 1px solid #292524;
-  }
-
-  .cookie-btn-reject:hover {
-    background-color: #292524;
-  }
+    /* QUICK ACTIONS PANEL */
+    .actions-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 25px;
+        margin-bottom: 70px;
+    }
+    .action-card {
+        background: var(--card-bg);
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        padding: 25px;
+        backdrop-filter: blur(10px);
+        text-decoration: none;
+        display: flex;
+        align-items: center;
+        gap: 20px;
+        transition: 0.3s;
+    }
+    .action-card:hover {
+        border-color: var(--accent-blue);
+        transform: translateY(-2px);
+        background: rgba(10, 15, 25, 0.8);
+    }
+    .action-icon {
+        width: 45px;
+        height: 45px;
+        background: rgba(255, 153, 0, 0.1);
+        color: #ff9900;
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.3rem;
+        border: 1px solid rgba(255, 153, 0, 0.2);
+        flex-shrink: 0;
+    }
+    .action-info .ac-title {
+        color: #fff;
+        font-weight: 800;
+        font-size: 0.95rem;
+        font-family: 'JetBrains Mono', monospace;
+        display: block;
+        margin-bottom: 4px;
+    }
+    .action-info .ac-desc {
+        color: var(--text-muted);
+        font-size: 0.8rem;
+    }
 </style>
 
-<section class="py-20 text-center px-4 max-w-4xl mx-auto">
-  <span class="text-xs font-bold uppercase tracking-widest text-amber-500 bg-amber-950/40 px-3 py-1 rounded-full border border-amber-500/30">
-    Hardware & Custom Assembly
-  </span>
-  <h1 class="text-4xl md:text-6xl font-black mt-6 mb-4 tracking-tight leading-tight">
-    PC <span class="bg-amber-500 text-black px-3 py-1 rounded-lg">HUB</span>
-  </h1>
-  <p class="text-slate-400 text-lg max-w-2xl mx-auto">
-    Niezależny projekt sprzętowy. Składanie, optymalizacja termiczna i dokumentacja unikalnych zestawów komputerowych.
-  </p>
+<!-- HERO SECTION -->
+<section class="pchub-hero">
+    <div class="pchub-badge">// HARDWARE & CUSTOM ASSEMBLY</div>
+    <h1 class="pchub-title">PC <span>HUB</span></h1>
+    <p class="pchub-desc">
+        Niezależny projekt sprzętowy. Składanie, optymalizacja termiczna, testy wydajności oraz dokumentacja unikalnych zestawów komputera – od budżetowych jednostek po systemy retro i SLI.
+    </p>
 </section>
 
-<!-- Footer z linkami do RODO/Cookies -->
-<footer class="pchub-footer">
-  <p>
-    © PC HUB | 
-    <a href="https://devlabstudy.ovh/polityka-prywatnosci">Polityka Prywatności</a> | 
-    <a href="#" onclick="openCookieSettings(event)">Ustawienia Cookies</a>
-  </p>
-</footer>
+<!-- WYIRÓŻNIONE PROJEKTY / BUILDS -->
+<span class="section-tag">AKTYWNE PROJEKTY & TESTY</span>
+<div class="builds-grid">
+    <!-- Projekt 1 -->
+    <div class="build-card">
+        <div>
+            <div class="build-header">
+                <div class="build-name">RETRO SLI RIG</div>
+                <div class="build-tag">Benchmark</div>
+            </div>
+            <p style="color: var(--text-muted); font-size: 0.88rem; line-height: 1.5; margin-bottom: 15px;">
+                Eksperymentalny zestaw retro oparty na procesorze Intel Core 2 Duo E8400 z podwójnymi kartami Nvidia w konfiguracji SLI.
+            </p>
+            <ul class="builds-specs build-specs">
+                <li><span>CPU:</span> <span>Intel Core 2 Duo E8400</span></li>
+                <li><span>GPU:</span> <span>Dual Nvidia GeForce GTX (SLI)</span></li>
+                <li><span>RAM:</span> <span>OCZ DDR2 Enthusiast</span></li>
+                <li><span>Status:</span> <span>W fazie testów</span></li>
+            </ul>
+        </div>
+        <div class="build-footer">
+            <span>// ARCHIVE: 2026</span>
+            <a href="https://www.youtube.com/channel/UCaTfVaE8Pb95CZvblqjNheA" target="_blank" class="build-link">Zobacz testy →</a>
+        </div>
+    </div>
 
-<!-- Baner Cookie -->
-<div id="cookie-banner">
-  <div class="cookie-title">🍪 Strona używa plików cookie</div>
-  <div class="cookie-content">
-    Używamy plików cookie w celu zapewnienia prawidłowego działania witryny oraz multimediów. Więcej szczegółów znajdziesz w naszej <a href="https://devlabstudy.ovh/polityka-prywatnosci">Polityce Prywatności</a>.
-  </div>
-  <div class="cookie-actions">
-    <button class="cookie-btn cookie-btn-reject" onclick="setCookieConsent('necessary')">Tylko niezbędne</button>
-    <button class="cookie-btn cookie-btn-accept" onclick="setCookieConsent('all')">Akceptuję</button>
-  </div>
+    <!-- Projekt 2 -->
+    <div class="build-card" style="border-left-color: var(--accent-blue);">
+        <div style="position: absolute; top: 0; left: 0; width: 4px; height: 100%; background: var(--accent-blue);"></div>
+        <div>
+            <div class="build-header">
+                <div class="build-name">BUDGET FLIP PC</div>
+                <div class="build-tag">Resale</div>
+            </div>
+            <p style="color: var(--text-muted); font-size: 0.88rem; line-height: 1.5; margin-bottom: 15px;">
+                Składanie, optymalizacja i odświeżanie używanych podzespołów (Intel 8th/9th gen, RX 570/580) z przeznaczeniem na OLX / Allegro.
+            </p>
+            <ul class="builds-specs build-specs">
+                <li><span>Platforma:</span> <span>LGA 1151 / AM4</span></li>
+                <li><span>Pasta term.:</span> <span>ARCTIC MX-7</span></li>
+                <li><span>Testy:</span> <span>OCCT & FurMark</span></li>
+                <li><span>Status:</span> <span>Active Flips</span></li>
+            </ul>
+        </div>
+        <div class="build-footer">
+            <span>// MARKETPLACE</span>
+            <a href="https://allegrolokalnie.pl/uzytkownik/Client:137881965" target="_blank" class="build-link" style="color: var(--accent-blue);">Sprawdź oferty →</a>
+        </div>
+    </div>
 </div>
 
-<script>
-  function checkCookieConsent() {
-    var consent = localStorage.getItem('devlab_cookie_consent');
-    if (!consent) {
-      document.getElementById('cookie-banner').style.display = 'block';
-    }
-  }
+<!-- SZYBKI DOSTĘP DO KANAŁU I SPOŁECZNOŚCI -->
+<span class="section-tag">WĘZŁY ZEWNĘTRZNE PC HUB</span>
+<div class="actions-grid">
+    <a href="https://www.youtube.com/channel/UCaTfVaE8Pb95CZvblqjNheA" target="_blank" class="action-card">
+        <div class="action-icon">▶</div>
+        <div class="action-info">
+            <span class="ac-title">Kanał YouTube PC Hub</span>
+            <span class="ac-desc">Teardowny, demontaże i testy sprzętu</span>
+        </div>
+    </a>
 
-  function setCookieConsent(type) {
-    localStorage.setItem('devlab_cookie_consent', type);
-    document.getElementById('cookie-banner').style.display = 'none';
-  }
+    <a href="https://www.vinted.pl/member/306118036" target="_blank" class="action-card">
+        <div class="action-icon">v</div>
+        <div class="action-info" style="color: #00bfb2;">
+            <span class="ac-title" style="color: #00bfb2;">Wyprzedaż Części (Vinted)</span>
+            <span class="ac-desc">Dostępne podzespoły i akcesoria</span>
+        </div>
+    </a>
 
-  function openCookieSettings(e) {
-    if (e) e.preventDefault();
-    document.getElementById('cookie-banner').style.display = 'block';
-  }
-
-  document.addEventListener('DOMContentLoaded', checkCookieConsent);
-</script>
+    <a href="https://devlabstudy.ovh" class="action-card">
+        <div class="action-icon">///</div>
+        <div class="action-info">
+            <span class="ac-title">Główny Hub DevLabStudy</span>
+            <span class="ac-desc">Powrót do centralnej infrastruktury</span>
+        </div>
+    </a>
+</div>
