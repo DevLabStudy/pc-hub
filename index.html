@@ -1,20 +1,20 @@
 ---
 layout: default
-title: PC Hub | Hardware & Custom Assembly
+title: PC Hub | Hardware, Custom Assembly & Benchmarks
 ---
 <style>
-    /* PEŁNA SZEROKOŚĆ KONTENERA */
+    /* KONFIGURACJA GŁÓWNEGO POJEMNIKA */
     .dashboard {
         max-width: 100% !important;
-        padding-left: 60px !important;
-        padding-right: 60px !important;
+        padding-left: 5vw !important;
+        padding-right: 5vw !important;
     }
 
     /* HERO SECTION DLA PC HUB */
     .pchub-hero {
         text-align: center;
         max-width: 900px;
-        margin: 40px auto 70px auto;
+        margin: 40px auto 60px auto;
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -23,54 +23,76 @@ title: PC Hub | Hardware & Custom Assembly
     .pchub-badge {
         font-family: 'JetBrains Mono', monospace;
         font-size: 0.75rem;
-        background: rgba(255, 165, 0, 0.1);
+        background: rgba(255, 153, 0, 0.12);
         color: #ff9900;
-        padding: 6px 14px;
+        padding: 6px 16px;
         border-radius: 20px;
-        border: 1px solid rgba(255, 165, 0, 0.3);
+        border: 1px solid rgba(255, 153, 0, 0.3);
         font-weight: 800;
         text-transform: uppercase;
         letter-spacing: 2px;
         margin-bottom: 20px;
-        display: inline-block;
+        box-shadow: 0 0 15px rgba(255, 153, 0, 0.1);
     }
 
     .pchub-title {
-        font-size: 4rem;
+        font-size: 3.8rem;
         font-weight: 900;
-        margin: 0 0 20px 0;
+        margin: 0 0 18px 0;
         letter-spacing: -2px;
         font-family: 'JetBrains Mono', monospace;
-        color: #fff;
+        color: #ffffff;
+        line-height: 1.1;
     }
     .pchub-title span {
         color: #ff9900;
+        text-shadow: 0 0 20px rgba(255, 153, 0, 0.3);
     }
 
     .pchub-desc {
-        color: var(--text-muted);
-        font-size: 1.15rem;
-        line-height: 1.8;
-        margin-bottom: 35px;
+        color: #a0aec0;
+        font-size: 1.1rem;
+        line-height: 1.7;
+        margin-bottom: 30px;
     }
 
-    /* SEKCJA PROJEKTÓW / BUILDS GRID */
+    /* SEKCJE NAGŁÓWKÓW */
+    .section-label {
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 0.85rem;
+        color: #ff9900;
+        text-transform: uppercase;
+        margin: 40px 0 20px 0;
+        font-weight: 800;
+        letter-spacing: 1.5px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+    .section-label::after {
+        content: '';
+        flex: 1;
+        height: 1px;
+        background: rgba(255, 255, 255, 0.08);
+    }
+
+    /* PROJEKTY GRID */
     .builds-grid {
         display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+        grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
         gap: 25px;
-        margin-bottom: 70px;
+        margin-bottom: 50px;
     }
 
     .build-card {
-        background: var(--card-bg);
-        border: 1px solid var(--border);
-        border-radius: 12px;
-        padding: 30px;
-        backdrop-filter: blur(10px);
+        background: rgba(15, 23, 42, 0.65);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        border-radius: 14px;
+        padding: 28px;
+        backdrop-filter: blur(12px);
         position: relative;
         overflow: hidden;
-        transition: 0.3s;
+        transition: all 0.3s ease;
         display: flex;
         flex-direction: column;
         justify-content: space-between;
@@ -82,9 +104,10 @@ title: PC Hub | Hardware & Custom Assembly
         background: #ff9900;
     }
     .build-card:hover {
-        border-color: #ff9900;
-        transform: translateY(-3px);
-        background: rgba(10, 15, 25, 0.85);
+        border-color: rgba(255, 153, 0, 0.5);
+        transform: translateY(-4px);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+        background: rgba(15, 23, 42, 0.85);
     }
 
     .build-header {
@@ -92,105 +115,152 @@ title: PC Hub | Hardware & Custom Assembly
         justify-content: space-between;
         align-items: flex-start;
         margin-bottom: 15px;
+        gap: 10px;
     }
     .build-name {
-        font-size: 1.25rem;
+        font-size: 1.3rem;
         font-weight: 900;
         color: #fff;
         font-family: 'JetBrains Mono', monospace;
     }
-    .build-tag {
+
+    /* BADGES DLA STATUSÓW */
+    .status-badge {
         font-family: 'JetBrains Mono', monospace;
         font-size: 0.68rem;
-        background: rgba(0, 210, 255, 0.1);
-        color: var(--accent-blue);
         padding: 4px 10px;
-        border-radius: 20px;
-        border: 1px solid rgba(0, 210, 255, 0.2);
-        font-weight: 700;
+        border-radius: 6px;
+        font-weight: 800;
         text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+    .status-completed {
+        background: rgba(16, 185, 129, 0.15);
+        color: #10b981;
+        border: 1px solid rgba(16, 185, 129, 0.3);
+    }
+    .status-active {
+        background: rgba(59, 130, 246, 0.15);
+        color: #60a5fa;
+        border: 1px solid rgba(59, 130, 246, 0.3);
     }
 
     .build-specs {
         list-style: none;
         padding: 0;
-        margin: 15px 0 25px 0;
-        color: var(--text-muted);
+        margin: 20px 0;
+        color: #94a3b8;
         font-size: 0.88rem;
-        line-height: 1.7;
     }
     .build-specs li {
         display: flex;
         justify-content: space-between;
-        border-bottom: 1px dashed rgba(255, 255, 255, 0.05);
-        padding: 5px 0;
+        border-bottom: 1px dashed rgba(255, 255, 255, 0.06);
+        padding: 8px 0;
     }
     .build-specs li span:last-child {
-        color: var(--text-main);
+        color: #e2e8f0;
         font-family: 'JetBrains Mono', monospace;
         font-weight: 600;
-        font-size: 0.82rem;
     }
 
     .build-footer {
         display: flex;
         justify-content: space-between;
         align-items: center;
-        border-top: 1px dashed rgba(255, 255, 255, 0.06);
-        padding-top: 15px;
+        border-top: 1px dashed rgba(255, 255, 255, 0.08);
+        padding-top: 18px;
         font-family: 'JetBrains Mono', monospace;
-        font-size: 0.78rem;
-        color: var(--text-muted);
+        font-size: 0.8rem;
     }
     .build-link {
         color: #ff9900;
         font-weight: 700;
         text-decoration: none;
         transition: 0.2s;
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
     }
     .build-link:hover {
-        text-decoration: underline;
+        color: #ffb703;
+        transform: translateX(3px);
+    }
+
+    /* SEKCJA OFERTY USŁUG */
+    .services-card {
+        background: linear-gradient(135deg, rgba(30, 41, 59, 0.8) 0%, rgba(15, 23, 42, 0.9) 100%);
+        border: 1px solid rgba(255, 153, 0, 0.25);
+        border-radius: 16px;
+        padding: 35px;
+        margin-bottom: 50px;
+        position: relative;
+        overflow: hidden;
+    }
+    .services-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 25px;
+        margin: 25px 0;
+    }
+    .service-item {
+        background: rgba(0, 0, 0, 0.25);
+        border: 1px solid rgba(255, 255, 255, 0.05);
+        border-radius: 10px;
+        padding: 20px;
+    }
+    .service-item h4 {
+        color: #ff9900;
+        margin: 0 0 10px 0;
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 1rem;
+    }
+    .service-item p {
+        color: #94a3b8;
+        font-size: 0.85rem;
+        line-height: 1.5;
+        margin: 0;
     }
 
     /* QUICK ACTIONS PANEL */
     .actions-grid {
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-        gap: 25px;
-        margin-bottom: 70px;
+        gap: 20px;
+        margin-bottom: 60px;
     }
     .action-card {
-        background: var(--card-bg);
-        border: 1px solid var(--border);
+        background: rgba(15, 23, 42, 0.6);
+        border: 1px solid rgba(255, 255, 255, 0.08);
         border-radius: 12px;
-        padding: 25px;
+        padding: 22px;
         backdrop-filter: blur(10px);
         text-decoration: none;
         display: flex;
         align-items: center;
-        gap: 20px;
-        transition: 0.3s;
+        gap: 18px;
+        transition: all 0.3s ease;
     }
     .action-card:hover {
-        border-color: var(--accent-blue);
-        transform: translateY(-2px);
-        background: rgba(10, 15, 25, 0.8);
+        border-color: #ff9900;
+        transform: translateY(-3px);
+        background: rgba(15, 23, 42, 0.85);
     }
     .action-icon {
-        width: 45px;
-        height: 45px;
+        width: 48px;
+        height: 48px;
         background: rgba(255, 153, 0, 0.1);
         color: #ff9900;
         border-radius: 10px;
         display: flex;
         align-items: center;
         justify-content: center;
-        font-size: 1.3rem;
-        border: 1px solid rgba(255, 153, 0, 0.2);
+        font-size: 1.2rem;
+        border: 1px solid rgba(255, 153, 0, 0.25);
         flex-shrink: 0;
     }
     .action-info .ac-title {
-        color: #fff;
+        color: #ffffff;
         font-weight: 800;
         font-size: 0.95rem;
         font-family: 'JetBrains Mono', monospace;
@@ -198,92 +268,130 @@ title: PC Hub | Hardware & Custom Assembly
         margin-bottom: 4px;
     }
     .action-info .ac-desc {
-        color: var(--text-muted);
+        color: #64748b;
         font-size: 0.8rem;
     }
 
     @media (max-width: 768px) {
-        .pchub-title { font-size: 2.8rem; }
+        .pchub-title { font-size: 2.5rem; }
         .dashboard { padding-left: 20px !important; padding-right: 20px !important; }
+        .services-card { padding: 20px; }
     }
 </style>
 
 <!-- HERO SECTION -->
 <section class="pchub-hero">
-    <div class="pchub-badge">// HARDWARE & CUSTOM ASSEMBLY</div>
+    <div class="pchub-badge">// HARDWARE, CUSTOM ASSEMBLY & BENCHMARKS</div>
     <h1 class="pchub-title">PC <span>HUB</span></h1>
     <p class="pchub-desc">
-        Niezależny projekt sprzętowy. Składanie, optymalizacja termiczna, testy wydajności oraz dokumentacja unikalnych zestawów komputera – od budżetowych jednostek po systemy retro i SLI.
+        Niezależna sekcja sprzętowa pod szyldem <strong>DevLabStudy</strong>. Zajmuję się profesjonalnym składaniem komputerów na zamówienie, tuningiem termicznym, rzetelnym testowaniem wydajności oraz dokumentacją projektów sprzętowych.
     </p>
 </section>
 
-<!-- WYIRÓŻNIONE PROJEKTY / BUILDS -->
-<div style="font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; color: var(--accent-contrast); text-transform: uppercase; margin-bottom: 15px; font-weight: 700;">// AKTYWNE PROJEKTY & TESTY</div>
+<!-- SEKCJA PROJEKTÓW / BUILDS -->
+<div class="section-label">// ZREALIZOWANE & AKTYWNE PROJEKTY</div>
 <div class="builds-grid">
-    <!-- Projekt 1 -->
+
+    <!-- PROJEKT #1 (RYZEN 1600 AF + RX 570) -->
     <div class="build-card">
         <div>
             <div class="build-header">
-                <div class="build-name">RETRO SLI RIG</div>
-                <div class="build-tag">Benchmark</div>
+                <div class="build-name">PROJEKT #1: BUDGET 1080P</div>
+                <div class="status-badge status-completed">ZAKOŃCZONY</div>
             </div>
-            <p style="color: var(--text-muted); font-size: 0.88rem; line-height: 1.5; margin-bottom: 15px;">
-                Eksperymentalny zestaw retro oparty na procesorze Intel Core 2 Duo E8400 z podwójnymi kartami Nvidia w konfiguracji SLI.
+            <p style="color: #94a3b8; font-size: 0.88rem; line-height: 1.6; margin-bottom: 15px;">
+                Kompletny montaż oraz skrupulatne testy wydajności budżetowego zestawu 1080p. Przetestowany w grach e-sportowych i nowszych AAA przy użyciu CapFrameX oraz logów sygnaturowych.
+            </p>
+            <ul class="build-specs">
+                <li><span>CPU:</span> <span>AMD Ryzen 5 1600 AF (6c/12t)</span></li>
+                <li><span>GPU:</span> <span>AMD Radeon RX 570 4GB GDDR5</span></li>
+                <li><span>RAM:</span> <span>16GB DDR4 Dual-Channel</span></li>
+                <li><span>Wyniki:</span> <span>MK11: 60 FPS | ZA4: 84 FPS (DX12)</span></li>
+            </ul>
+        </div>
+        <div class="build-footer">
+            <span style="color: #64748b;">// DOKUMENTACJA</span>
+            <a href="https://devlabstudy.ovh/blog" class="build-link">Raport & Tabela testów →</a>
+        </div>
+    </div>
+
+    <!-- PROJEKT #2 (RETRO SLI RIG) -->
+    <div class="build-card" style="border-left-color: #3b82f6;">
+        <div style="position: absolute; top: 0; left: 0; width: 4px; height: 100%; background: #3b82f6;"></div>
+        <div>
+            <div class="build-header">
+                <div class="build-name">PROJEKT #2: RETRO SLI RIG</div>
+                <div class="status-badge status-active">W FAZIE BUDOWY</div>
+            </div>
+            <p style="color: #94a3b8; font-size: 0.88rem; line-height: 1.6; margin-bottom: 15px;">
+                Eksperymentalny zestaw retro z epoki podwójnych kart graficznych. Testy skalowania technologii Nvidia SLI w starszych benchmarkach i klasykach.
             </p>
             <ul class="build-specs">
                 <li><span>CPU:</span> <span>Intel Core 2 Duo E8400</span></li>
-                <li><span>GPU:</span> <span>Dual Nvidia GeForce GTX 560ti (SLI)</span></li>
+                <li><span>GPU:</span> <span>2x Nvidia GTX 560 Ti (SLI)</span></li>
                 <li><span>RAM:</span> <span>OCZ DDR2 Enthusiast</span></li>
-                <li><span>Status:</span> <span>W fazie kompletowania części</span></li>
+                <li><span>Status:</span> <span>Kompletowanie podzespołów</span></li>
             </ul>
         </div>
         <div class="build-footer">
-            <span>// ARCHIVE: 2026</span>
-            <a href="https://www.youtube.com/channel/UCaTfVaE8Pb95CZvblqjNheA" target="_blank" class="build-link">Zobacz testy →</a>
+            <span style="color: #64748b;">// ARCHIWUM YOUTUBE</span>
+            <a href="https://www.youtube.com/channel/UCaTfVaE8Pb95CZvblqjNheA" target="_blank" class="build-link" style="color: #60a5fa;">Wideo z budowy →</a>
         </div>
     </div>
 
-    <!-- Projekt 2 -->
-    <div class="build-card" style="border-left-color: var(--accent-blue);">
-        <div style="position: absolute; top: 0; left: 0; width: 4px; height: 100%; background: var(--accent-blue);"></div>
-        <div>
-            <div class="build-header">
-                <div class="build-name">BUDGET FLIP PC</div>
-                <div class="build-tag">Resale</div>
-            </div>
-            <p style="color: var(--text-muted); font-size: 0.88rem; line-height: 1.5; margin-bottom: 15px;">
-                Składanie, optymalizacja i odświeżanie używanych podzespołów (Intel 8th/9th gen, RX 570/580) z przeznaczeniem na OLX / Allegro.
-            </p>
-            <ul class="build-specs">
-                <li><span>Platforma:</span> <span>LGA 1151 / AM4</span></li>
-                <li><span>Pasta term.:</span> <span>ARCTIC MX-7</span></li>
-                <li><span>Testy:</span> <span>OCCT & FurMark</span></li>
-                <li><span>Status:</span> <span>Oczekiwanie na ostatnią przesyłkę</span></li>
-            </ul>
+</div>
+
+<!-- SEKCJA USŁUGI SKŁADANIA KOMPUTERÓW -->
+<div class="section-label">// USŁUGA: SKŁADANIE PC NA ZAMÓWIENIE</div>
+<div class="services-card">
+    <h3 style="color: #fff; margin: 0 0 10px 0; font-family: 'JetBrains Mono', monospace; font-size: 1.5rem;">
+        Potrzebujesz komputera dopasowanego do Twojego budżetu?
+    </h3>
+    <p style="color: #94a3b8; font-size: 0.95rem; line-height: 1.6; margin: 0;">
+        Oferuję kompleksowe doradztwo, dobór części (nowych lub sprawdzonych używanych), montaż, optymalizację okablowania oraz pełne testy obciążeniowe (OCCT, FurMark, wygrzewanie) przed przekazaniem sprzętu.
+    </p>
+
+    <div class="services-grid">
+        <div class="service-item">
+            <h4>1. Budżetowe Zestawy</h4>
+            <p>Maksymalna wydajność w najniższej cenie. Wykorzystanie sprawdzonych podzespołów z rynku wtórnego z pełną gwarancją rozruchową i testami.</p>
         </div>
-        <div class="build-footer">
-            <span>// MARKETPLACE</span>
-            <a href="https://allegrolokalnie.pl/uzytkownik/Client:137881965" target="_blank" class="build-link" style="color: var(--accent-blue);">Sprawdź oferty →</a>
+        <div class="service-item">
+            <h4>2. PC do E-Sportu</h4>
+            <p>Konfiguracje pod wysokie FPS-y w CS2, Fortnite, Valorant czy League of Legends. Nastawienie na niski input lag i wysoki 1% low FPS.</p>
         </div>
+        <div class="service-item">
+            <h4>3. Pełny Audyt & Service</h4>
+            <p>Czyszczenie, wymiana past termicznych (ARCTIC MX-7), customowe prowadzenie przewodów i undervolting dla cichej pracy.</p>
+        </div>
+    </div>
+
+    <div style="display: flex; gap: 15px; flex-wrap: wrap; align-items: center; margin-top: 25px;">
+        <a href="https://devlabstudy.ovh/contact" class="build-link" style="background: #ff9900; color: #000; padding: 10px 22px; border-radius: 8px; font-weight: 800; text-decoration: none;">
+            Zamów wycenę zestawu
+        </a>
+        <span style="color: #64748b; font-family: 'JetBrains Mono', monospace; font-size: 0.8rem;">
+            // Cieszyn & Wysyłka Cała Polska
+        </span>
     </div>
 </div>
 
-<!-- SZYBKI DOSTĘP DO KANAŁU I SPOŁECZNOŚCI -->
-<div style="font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; color: var(--accent-contrast); text-transform: uppercase; margin-bottom: 15px; font-weight: 700;">// WĘZŁY ZEWNĘTRZNE PC HUB</div>
+<!-- SZYBKI DOSTĘP I LINKI ZEWNĘTRZNE -->
+<div class="section-label">// WĘZŁY ZEWNĘTRZNE PC HUB</div>
 <div class="actions-grid">
     <a href="https://www.youtube.com/channel/UCaTfVaE8Pb95CZvblqjNheA" target="_blank" class="action-card">
         <div class="action-icon">▶</div>
         <div class="action-info">
             <span class="ac-title">Kanał YouTube PC Hub</span>
-            <span class="ac-desc">Teardowny, demontaże i testy sprzętu</span>
+            <span class="ac-desc">Teardowny, montaż i wideo-testy</span>
         </div>
     </a>
 
     <a href="https://www.vinted.pl/member/306118036" target="_blank" class="action-card">
-        <div class="action-icon">v</div>
-        <div class="action-info" style="color: #00bfb2;">
+        <div class="action-icon" style="color: #00bfb2; background: rgba(0, 191, 178, 0.1); border-color: rgba(0, 191, 178, 0.25);">v</div>
+        <div class="action-info">
             <span class="ac-title" style="color: #00bfb2;">Wyprzedaż Części (Vinted)</span>
-            <span class="ac-desc">Dostępne podzespoły i akcesoria</span>
+            <span class="ac-desc">Akcesoria i zweryfikowany sprzęt</span>
         </div>
     </a>
 
@@ -291,7 +399,7 @@ title: PC Hub | Hardware & Custom Assembly
         <div class="action-icon">///</div>
         <div class="action-info">
             <span class="ac-title">Główny Hub DevLabStudy</span>
-            <span class="ac-desc">Powrót do centralnej infrastruktury</span>
+            <span class="ac-desc">Powrót do strony głównej</span>
         </div>
     </a>
 </div>
