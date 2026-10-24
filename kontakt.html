@@ -1,0 +1,219 @@
+---
+layout: default
+title: Kontakt & Wycena Komputera | PC Hub
+url: /kontakt
+---
+
+<style>
+    .contact-container {
+        max-width: 1000px;
+        margin: 20px auto 60px auto;
+    }
+
+    .contact-header {
+        text-align: center;
+        margin-bottom: 50px;
+    }
+
+    .contact-badge {
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 0.75rem;
+        background: rgba(255, 153, 0, 0.12);
+        color: #ff9900;
+        padding: 6px 16px;
+        border-radius: 20px;
+        border: 1px solid rgba(255, 153, 0, 0.3);
+        font-weight: 800;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        display: inline-block;
+        margin-bottom: 15px;
+    }
+
+    .contact-title {
+        font-size: 3rem;
+        font-weight: 900;
+        font-family: 'JetBrains Mono', monospace;
+        color: #fff;
+        margin: 0 0 15px 0;
+    }
+    .contact-title span { color: #ff9900; }
+
+    .contact-grid {
+        display: grid;
+        grid-template-columns: 1fr 1.5fr;
+        gap: 40px;
+    }
+
+    /* INFO CARD */
+    .info-card {
+        background: rgba(15, 23, 42, 0.7);
+        border: 1px solid rgba(255, 153, 0, 0.2);
+        border-radius: 14px;
+        padding: 30px;
+        backdrop-filter: blur(10px);
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+
+    .info-item {
+        margin-bottom: 25px;
+    }
+    .info-label {
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 0.75rem;
+        color: #ff9900;
+        text-transform: uppercase;
+        margin-bottom: 6px;
+        display: block;
+    }
+    .info-value {
+        color: #f1f5f9;
+        font-size: 1rem;
+        font-weight: 700;
+        line-height: 1.5;
+    }
+
+    /* FORMULARZ */
+    .form-card {
+        background: rgba(15, 23, 42, 0.7);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        border-radius: 14px;
+        padding: 35px;
+        backdrop-filter: blur(10px);
+    }
+
+    .form-group {
+        margin-bottom: 20px;
+    }
+    .form-label {
+        display: block;
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 0.8rem;
+        color: #94a3b8;
+        margin-bottom: 8px;
+    }
+    .form-input, .form-select, .form-textarea {
+        width: 100%;
+        background: rgba(3, 3, 5, 0.8);
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        border-radius: 8px;
+        padding: 12px 16px;
+        color: #fff;
+        font-family: 'Inter', sans-serif;
+        font-size: 0.9rem;
+        box-sizing: border-box;
+        transition: 0.3s;
+    }
+    .form-input:focus, .form-select:focus, .form-textarea:focus {
+        border-color: #ff9900;
+        outline: none;
+        box-shadow: 0 0 10px rgba(255, 153, 0, 0.2);
+    }
+
+    .submit-btn {
+        width: 100%;
+        background: #ff9900;
+        color: #030305;
+        border: none;
+        padding: 14px;
+        border-radius: 8px;
+        font-family: 'JetBrains Mono', monospace;
+        font-weight: 900;
+        font-size: 0.9rem;
+        text-transform: uppercase;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        letter-spacing: 1px;
+    }
+    .submit-btn:hover {
+        background: #ffb703;
+        transform: translateY(-2px);
+        box-shadow: 0 5px 20px rgba(255, 153, 0, 0.4);
+    }
+
+    @media (max-width: 868px) {
+        .contact-grid { grid-template-columns: 1fr; }
+        .contact-title { font-size: 2.2rem; }
+    }
+</style>
+
+<div class="contact-container">
+    <div class="contact-header">
+        <div class="contact-badge">// CUSTOM ASSEMBLY & INQUIRIES</div>
+        <h1 class="contact-title">SKONTAKTUJ SIĘ / <span>WYCENA</span></h1>
+        <p style="color: #94a3b8; font-size: 1.05rem; max-width: 650px; margin: 0 auto;">
+            Szukasz komputera do gier, e-sportu lub pracy? Wypełnij poniższy formularz – dobiorę optymalne podzespoły w Twoim budżecie i przygotuję darmową wycenę.
+        </p>
+    </div>
+
+    <div class="contact-grid">
+        <!-- LEWA KOLUMNA - DANE KONTAKTOWE -->
+        <div class="info-card">
+            <div>
+                <div class="info-item">
+                    <span class="info-label">// Lokalizacja warsztatu</span>
+                    <div class="info-value">Cieszyn, Śląsk</div>
+                    <span style="color: #64748b; font-size: 0.8rem;">(Odbiór osobisty lub bezpieczna wysyłka)</span>
+                </div>
+
+                <div class="info-item">
+                    <span class="info-label">// Bezpośredni e-mail</span>
+                    <div class="info-value"><a href="mailto:kontakt@devlabstudy.ovh" style="color: #ff9900;">kontakt@devlabstudy.ovh</a></div>
+                </div>
+
+                <div class="info-item">
+                    <span class="info-label">// Standardy montażu</span>
+                    <ul style="padding-left: 18px; margin: 8px 0; color: #94a3b8; font-size: 0.85rem; line-height: 1.6;">
+                        <li>Testy obciążeniowe OCCT & FurMark</li>
+                        <li>Optymalne układanie okablowania</li>
+                        <li>Użycie markowych past (ARCTIC MX-7)</li>
+                        <li>Aktualizacja BIOS & ustawienie profilu XMP/EXPO</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div style="border-top: 1px dashed rgba(255,255,255,0.1); padding-top: 15px;">
+                <span class="info-label">// Kanały Społecznościowe</span>
+                <div style="display: flex; gap: 10px; margin-top: 10px;">
+                    <a href="https://www.youtube.com/channel/UCaTfVaE8Pb95CZvblqjNheA" target="_blank" style="color: #ff9900; font-family: 'JetBrains Mono', monospace; font-size: 0.8rem;">YouTube →</a>
+                    <a href="https://www.vinted.pl/member/306118036" target="_blank" style="color: #00bfb2; font-family: 'JetBrains Mono', monospace; font-size: 0.8rem;">Vinted →</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- PRAWA KOLUMNA - FORMULARZ -->
+        <div class="form-card">
+            <form action="https://formspree.io/f/xvovbzpz" method="POST">
+                <div class="form-group">
+                    <label class="form-label">Twoje Imię / Nick</label>
+                    <input type="text" name="name" class="form-input" placeholder="np. Jan" required>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Adres E-mail (do odpowiedzi)</label>
+                    <input type="email" name="email" class="form-input" placeholder="jan@example.com" required>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Planowany Budżet</label>
+                    <select name="budget" class="form-select">
+                        <option value="1000-2000 zł">1000 zł - 2000 zł (Tani zestaw 1080p / Rynek wtórny)</option>
+                        <option value="2000-3500 zł">2000 zł - 3500 zł (E-Sport / Nowsze gry)</option>
+                        <option value="3500-5000 zł">3500 zł - 5000 zł (Płynne 1080p High / 1440p)</option>
+                        <option value="5000+ zł">Powyżej 5000 zł (Top wydajność)</option>
+                        <option value="Inny">Inny / Serwis lub Czyszczenie</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Główne Przeznaczenie & Wiadomość</label>
+                    <textarea name="message" class="form-textarea" rows="5" placeholder="Napisz, w jakie gry grasz (np. CS2, Fortnite, Cyberpunk) lub jakie masz specyficzne wymagania co do komputera..." required></textarea>
+                </div>
+
+                <button type="submit" class="submit-btn">Wyślij Zapytanie o Wycenę</button>
+            </form>
+        </div>
+    </div>
+</div>
