@@ -13,7 +13,7 @@
     <style>
         :root { 
             --bg-body: #030305; 
-            --bg-nav: #030305; 
+            --bg-nav: rgba(3, 3, 5, 0.9); 
             --text-main: #f1f5f9; 
             --text-muted: #8b9bb4; 
             --border: rgba(255, 153, 0, 0.2); 
@@ -38,15 +38,14 @@
 
         a { color: inherit; text-decoration: none; }
 
-        /* NAVBAR */
+        /* NAVBAR - NAPRAWIONY DLA LEPSZEJ CZYTELNOŚCI */
         .navbar { 
             background: var(--bg-nav); 
             border-bottom: 1px solid var(--border); 
-            padding: 22px 60px; 
-            display: grid; 
-            grid-template-columns: auto 1fr; 
+            padding: 16px 5vw; 
+            display: flex; 
+            justify-content: space-between; 
             align-items: center; 
-            gap: 30px;
             position: sticky; 
             top: 0; 
             z-index: 1000;
@@ -55,7 +54,7 @@
             backdrop-filter: blur(12px);
         }
 
-        .nav-left { display: flex; align-items: center; justify-content: space-between; width: 100%; }
+        .nav-left { display: flex; align-items: center; justify-content: space-between; }
         .nav-brand { 
             font-size: 1.3rem; 
             font-weight: 900; 
@@ -75,7 +74,7 @@
             display: flex; 
             justify-content: flex-end; 
             align-items: center; 
-            gap: 6px; 
+            gap: 8px; 
             position: relative;
         }
 
@@ -140,7 +139,7 @@
         .dashboard { 
             width: 100%; 
             max-width: 100% !important; 
-            padding: 50px 60px; 
+            padding: 40px 5vw; 
             margin: 0 auto; 
             box-sizing: border-box; 
             flex: 1; 
@@ -150,8 +149,8 @@
         .dashboard-footer { 
             background: #010204;
             border-top: 1px solid var(--border); 
-            padding: 70px 60px 40px 60px; 
-            margin-top: 100px;
+            padding: 60px 5vw 30px 5vw; 
+            margin-top: 80px;
             box-sizing: border-box; 
             font-family: 'JetBrains Mono', monospace;
             width: 100%;
@@ -159,7 +158,7 @@
         .footer-grid {
             width: 100%;
             max-width: 1550px;
-            margin: 0 auto 50px auto;
+            margin: 0 auto 40px auto;
             display: grid;
             grid-template-columns: 2fr 1fr 1fr 1.5fr;
             gap: 40px;
@@ -202,14 +201,14 @@
         .footer-divider {
             width: 100%;
             max-width: 1550px;
-            margin: 0 auto 30px auto;
+            margin: 0 auto 25px auto;
             border-top: 1px solid rgba(255, 255, 255, 0.08);
         }
 
         .footer-sublinks-bar {
             width: 100%;
             max-width: 1550px;
-            margin: 0 auto 25px auto;
+            margin: 0 auto 20px auto;
             display: flex;
             flex-wrap: wrap;
             gap: 25px;
@@ -267,13 +266,12 @@
         /* RESPONSYWNOŚĆ DLA URZĄDZEŃ MOBILNYCH */
         @media (max-width: 1024px) { 
             .navbar { 
-                grid-template-columns: 1fr; 
-                gap: 15px; 
+                flex-direction: column; 
+                align-items: flex-start; 
                 padding: 15px 20px; 
             }
-            .mobile-menu-toggle {
-                display: flex;
-            }
+            .nav-left { width: 100%; }
+            .mobile-menu-toggle { display: flex; }
             .nav-center { 
                 display: none; 
                 flex-direction: column; 
@@ -281,14 +279,11 @@
                 align-items: stretch;
                 gap: 8px; 
                 padding-top: 15px;
+                margin-top: 10px;
                 border-top: 1px solid var(--border);
             }
-            .nav-center.mobile-active {
-                display: flex;
-            }
-            .nav-indicator {
-                display: none !important;
-            }
+            .nav-center.mobile-active { display: flex; }
+            .nav-indicator { display: none !important; }
             .nav-link-btn {
                 justify-content: flex-start;
                 padding: 10px 14px;
@@ -315,7 +310,6 @@
                 </svg>
                 PC <span>HUB</span>
             </a>
-            <!-- PRZYCISK MENU MOBILNEGO -->
             <button class="mobile-menu-toggle" id="mobileMenuBtn" aria-label="Menu nawigacyjne">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
             </button>
@@ -366,8 +360,8 @@
                 <h4>Partnerzy & Usługi</h4>
                 <ul>
                     <li><a href="/webcraft">WebCraft Studio (Strony WWW)</a></li>
-                    <li><a href="/sponsors">Sponsorzy projektu</a></li>
-                    <li><a href="/benchmarks">Wydajność i Benchmarks</a></li>
+                    <li><a href="/kontakt">Zamów Składanie PC</a></li>
+                    <li><a href="/pc-hub">Wydajność i Benchmarks</a></li>
                 </ul>
             </div>
             <div class="footer-col">
@@ -393,13 +387,12 @@
         </div>
 
         <div class="footer-meta-bar">
-            <div>Page Last Updated: <span>October 22, 2026</span></div>
+            <div>Page Last Updated: <span>October 24, 2026</span></div>
             <div>Page Editor: <span>Tobiasz Kajzer</span></div>
             <div>Project Official: <span>PC Hub Administrator</span></div>
         </div>
     </footer>
 
-    <!-- SKRYPT NAWIGACJI ORAZ COOKIES -->
     <script>
         window.addEventListener('DOMContentLoaded', () => {
             const navCenter = document.getElementById('navCenter');
