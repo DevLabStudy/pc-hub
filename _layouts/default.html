@@ -13,7 +13,6 @@
     <style>
         :root { 
             --bg-body: #030305; 
-            --bg-nav: rgba(3, 3, 5, 0.9); 
             --text-main: #f1f5f9; 
             --text-muted: #8b9bb4; 
             --border: rgba(255, 153, 0, 0.2); 
@@ -28,6 +27,7 @@
             background-color: var(--bg-body); 
             color: var(--text-main); 
             margin: 0; 
+            padding: 0;
             min-height: 100vh;
             display: flex;
             flex-direction: column;
@@ -38,119 +38,22 @@
 
         a { color: inherit; text-decoration: none; }
 
-        /* NAVBAR - NAPRAWIONY DLA LEPSZEJ CZYTELNOŚCI */
-        .navbar { 
-            background: var(--bg-nav); 
-            border-bottom: 1px solid var(--border); 
-            padding: 16px 5vw; 
-            display: flex; 
-            justify-content: space-between; 
-            align-items: center; 
-            position: sticky; 
-            top: 0; 
-            z-index: 1000;
-            width: 100%;
-            box-sizing: border-box;
-            backdrop-filter: blur(12px);
-        }
-
-        .nav-left { display: flex; align-items: center; justify-content: space-between; }
-        .nav-brand { 
-            font-size: 1.3rem; 
-            font-weight: 900; 
-            text-decoration: none; 
-            color: #fff; 
-            letter-spacing: 1px; 
-            text-transform: uppercase; 
-            display: flex; 
-            align-items: center; 
-            gap: 10px; 
-            font-family: 'JetBrains Mono', monospace;
-        }
-        .nav-brand svg { width: 24px; height: 24px; stroke: var(--accent-contrast); }
-        .nav-brand span { color: var(--accent-contrast); }
-        
-        .nav-center { 
-            display: flex; 
-            justify-content: flex-end; 
-            align-items: center; 
-            gap: 8px; 
-            position: relative;
-        }
-
-        /* PRZYCISK HAMBURGERA DLA MOBILNYCH */
-        .mobile-menu-toggle {
-            display: none;
-            background: transparent;
-            border: 1px solid var(--border);
-            border-radius: 6px;
-            color: #fff;
-            padding: 8px 10px;
-            cursor: pointer;
-            align-items: center;
-            justify-content: center;
-        }
-        .mobile-menu-toggle svg { width: 22px; height: 22px; stroke: var(--accent-contrast); }
-
-        .nav-link-btn { 
-            text-decoration: none; 
-            color: var(--text-muted); 
-            font-weight: 600; 
-            font-size: 0.9rem; 
-            transition: color 0.3s; 
-            padding: 8px 16px;
-            border-radius: 6px;
-            z-index: 2;
-            background: transparent;
-            border: none;
-            cursor: pointer;
-            font-family: 'Inter', sans-serif;
-            display: inline-flex;
-            align-items: center;
-            gap: 5px;
-            position: relative;
-        }
-
-        .nav-link-btn:hover, 
-        .nav-link-btn.active-page { 
-            color: var(--accent-contrast); 
-        }
-
-        /* PŁYWAJĄCY WSKAŹNIK (PILL) */
-        .nav-indicator {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            height: 3px;
-            background: var(--accent-contrast);
-            border-radius: 3px;
-            z-index: 1;
-            box-shadow: 0 0 10px rgba(255, 153, 0, 0.5);
-            pointer-events: none;
-            opacity: 0;
-            transition: none;
-        }
-
-        .nav-indicator.animated {
-            transition: width 0.25s cubic-bezier(0.4, 0, 0.2, 1), transform 0.25s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        /* DASHBOARD / TREŚĆ STRONY */
+        /* DASHBOARD / MAIN CONTENT - BEZ GÓRNEJ NAWIGACJI */
         .dashboard { 
             width: 100%; 
             max-width: 100% !important; 
-            padding: 40px 5vw; 
+            padding: 30px 5vw; 
             margin: 0 auto; 
             box-sizing: border-box; 
             flex: 1; 
         }
 
-        /* STOPKA – POZIOMA (GRID) */
+        /* STOPKA */
         .dashboard-footer { 
             background: #010204;
             border-top: 1px solid var(--border); 
-            padding: 60px 5vw 30px 5vw; 
-            margin-top: 80px;
+            padding: 50px 5vw 30px 5vw; 
+            margin-top: 60px;
             box-sizing: border-box; 
             font-family: 'JetBrains Mono', monospace;
             width: 100%;
@@ -158,186 +61,74 @@
         .footer-grid {
             width: 100%;
             max-width: 1550px;
-            margin: 0 auto 40px auto;
+            margin: 0 auto 30px auto;
             display: grid;
             grid-template-columns: 2fr 1fr 1fr 1.5fr;
             gap: 40px;
             box-sizing: border-box;
         }
-        .footer-col h4 { color: #fff; font-size: 0.85rem; text-transform: uppercase; margin-bottom: 20px; letter-spacing: 1.5px; }
+        .footer-col h4 { color: #fff; font-size: 0.85rem; text-transform: uppercase; margin-bottom: 18px; letter-spacing: 1.5px; }
         .footer-col p { color: var(--text-muted); font-size: 0.82rem; line-height: 1.7; margin: 0; font-family: 'Inter', sans-serif; }
-        .footer-col ul { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 12px; }
-        .footer-col ul a { color: var(--text-muted); font-size: 0.82rem; transition: 0.2s; font-family: 'Inter', sans-serif; text-decoration: none; }
+        .footer-col ul { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 10px; }
+        .footer-col ul a { color: var(--text-muted); font-size: 0.82rem; transition: 0.2s; font-family: 'Inter', sans-serif; }
         .footer-col ul a:hover { color: var(--accent-contrast); }
 
-        .social-icons-grid {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-            max-width: 260px;
-        }
+        .social-icons-grid { display: flex; flex-wrap: wrap; gap: 10px; }
         .social-icon-btn {
-            width: 36px;
-            height: 36px;
+            width: 36px; height: 36px;
             background: rgba(255, 255, 255, 0.04);
             border: 1px solid rgba(255, 255, 255, 0.1);
             border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #fff;
-            text-decoration: none;
-            transition: 0.25s;
+            display: flex; align-items: center; justify-content: center;
+            color: #fff; transition: 0.25s;
         }
         .social-icon-btn svg { width: 15px; height: 15px; fill: currentColor; }
         .social-icon-btn:hover {
-            background: var(--accent-contrast);
-            color: #030305;
-            border-color: var(--accent-contrast);
-            transform: translateY(-2px);
-            box-shadow: 0 4px 15px rgba(255, 153, 0, 0.3);
+            background: var(--accent-contrast); color: #030305;
+            border-color: var(--accent-contrast); transform: translateY(-2px);
         }
 
-        .footer-divider {
-            width: 100%;
-            max-width: 1550px;
-            margin: 0 auto 25px auto;
-            border-top: 1px solid rgba(255, 255, 255, 0.08);
-        }
-
-        .footer-sublinks-bar {
-            width: 100%;
-            max-width: 1550px;
-            margin: 0 auto 20px auto;
-            display: flex;
-            flex-wrap: wrap;
-            gap: 25px;
-            font-size: 0.78rem;
-            font-family: 'Inter', sans-serif;
-        }
-        .footer-sublinks-bar a {
-            color: var(--text-muted);
-            transition: color 0.2s;
-            text-decoration: none;
-        }
-        .footer-sublinks-bar a:hover {
-            color: var(--accent-contrast);
-        }
-
+        .footer-divider { width: 100%; max-width: 1550px; margin: 0 auto 20px auto; border-top: 1px solid rgba(255, 255, 255, 0.08); }
+        
         .footer-meta-bar {
-            width: 100%;
-            max-width: 1550px;
-            margin: 0 auto;
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-between;
-            align-items: center;
-            font-size: 0.73rem;
-            color: var(--text-muted);
-            font-family: 'JetBrains Mono', monospace;
-            gap: 15px;
+            width: 100%; max-width: 1550px; margin: 0 auto;
+            display: flex; flex-wrap: wrap; justify-content: space-between;
+            align-items: center; font-size: 0.73rem; color: var(--text-muted);
+            font-family: 'JetBrains Mono', monospace; gap: 15px;
         }
-        .footer-meta-bar span {
-            color: #fff;
-            font-weight: 700;
-        }
+        .footer-meta-bar span { color: #fff; font-weight: 700; }
 
-        /* BANNER COOKIES / RODO */
         #cookieBanner {
-            display: none;
-            position: fixed;
-            bottom: 20px;
-            left: 20px;
-            right: 20px;
-            max-width: 600px;
-            margin: 0 auto;
-            background: rgba(8, 12, 20, 0.96);
-            border: 1px solid var(--border);
-            backdrop-filter: blur(16px);
-            padding: 20px 25px;
-            border-radius: 12px;
-            z-index: 9999;
-            box-shadow: 0 15px 40px rgba(0,0,0,0.8);
-            align-items: center;
-            gap: 20px;
-            flex-wrap: wrap;
+            display: none; position: fixed; bottom: 20px; left: 20px; right: 20px;
+            max-width: 600px; margin: 0 auto; background: rgba(8, 12, 20, 0.96);
+            border: 1px solid var(--border); backdrop-filter: blur(16px);
+            padding: 18px 22px; border-radius: 12px; z-index: 9999;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.8); align-items: center; gap: 15px; flex-wrap: wrap;
         }
 
-        /* RESPONSYWNOŚĆ DLA URZĄDZEŃ MOBILNYCH */
         @media (max-width: 1024px) { 
-            .navbar { 
-                flex-direction: column; 
-                align-items: flex-start; 
-                padding: 15px 20px; 
-            }
-            .nav-left { width: 100%; }
-            .mobile-menu-toggle { display: flex; }
-            .nav-center { 
-                display: none; 
-                flex-direction: column; 
-                width: 100%; 
-                align-items: stretch;
-                gap: 8px; 
-                padding-top: 15px;
-                margin-top: 10px;
-                border-top: 1px solid var(--border);
-            }
-            .nav-center.mobile-active { display: flex; }
-            .nav-indicator { display: none !important; }
-            .nav-link-btn {
-                justify-content: flex-start;
-                padding: 10px 14px;
-                width: 100%;
-            }
-            .dashboard { padding: 30px 20px !important; }
-            .dashboard-footer { padding: 40px 20px 30px 20px; }
-            .footer-grid { grid-template-columns: 1fr; gap: 30px; }
-            .footer-meta-bar { flex-direction: column; text-align: center; gap: 10px; }
-            .social-icons-grid { max-width: 100%; justify-content: center; }
-            #cookieBanner { bottom: 10px; left: 10px; right: 10px; padding: 15px; }
+            .dashboard { padding: 20px !important; }
+            .dashboard-footer { padding: 30px 20px; }
+            .footer-grid { grid-template-columns: 1fr; gap: 25px; }
+            .footer-meta-bar { flex-direction: column; text-align: center; gap: 8px; }
         }
     </style>
 </head>
 <body>
 
-    <nav class="navbar">
-        <div class="nav-left">
-            <a href="/" class="nav-brand">
-                <svg viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                    <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
-                    <line x1="8" y1="21" x2="16" y2="21"></line>
-                    <line x1="12" y1="17" x2="12" y2="21"></line>
-                </svg>
-                PC <span>HUB</span>
-            </a>
-            <button class="mobile-menu-toggle" id="mobileMenuBtn" aria-label="Menu nawigacyjne">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
-            </button>
-        </div>
-        <div class="nav-center" id="navCenter">
-            <div class="nav-indicator" id="navIndicator"></div>
-            <a href="/" class="nav-link-btn {% if page.url == '/' %}active-page{% endif %}">Hub Główny</a>
-            <a href="/pc-hub" class="nav-link-btn {% if page.url contains 'pc-hub' %}active-page{% endif %}">PC Hub</a>
-            <a href="/newsy" class="nav-link-btn {% if page.url contains 'newsy' %}active-page{% endif %}">Newsy</a>
-            <a href="/homelab" class="nav-link-btn {% if page.url contains 'homelab' %}active-page{% endif %}">HomeLab</a>
-            <a href="/webcraft" class="nav-link-btn {% if page.url contains 'webcraft' %}active-page{% endif %}">WebCraft</a>
-            <a href="/kontakt" class="nav-link-btn {% if page.url contains 'kontakt' %}active-page{% endif %}">Kontakt</a>
-        </div>
-    </nav>
-
     <main class="dashboard">
         {{ content }}
     </main>
 
-    <!-- BANNER COOKIES / RODO -->
+    <!-- BANNER COOKIES -->
     <div id="cookieBanner">
-        <div style="flex: 1; min-width: 260px;">
-            <div style="font-family: 'JetBrains Mono', monospace; font-size: 0.72rem; color: var(--accent-contrast); text-transform: uppercase; margin-bottom: 6px; font-weight: 700;">// Polityka Prywatności & Cookies</div>
-            <p style="color: var(--text-muted); font-size: 0.82rem; line-height: 1.5; margin: 0;">Używamy plików cookies w celach statystycznych oraz optymalizacji serwisu. Korzystając ze strony, wyrażasz zgodę na ich użycie.</p>
+        <div style="flex: 1; min-width: 240px;">
+            <div style="font-family: 'JetBrains Mono', monospace; font-size: 0.72rem; color: var(--accent-contrast); text-transform: uppercase; margin-bottom: 4px; font-weight: 700;">// Privacy Policy</div>
+            <p style="color: var(--text-muted); font-size: 0.8rem; margin: 0;">Serwis wykorzystuje pliki cookies do celów analitycznych i statystycznych.</p>
         </div>
-        <div style="display: flex; gap: 10px; align-items: center;">
-            <button id="acceptCookies" style="background: var(--accent-contrast); color: #030305; border: none; padding: 10px 16px; border-radius: 6px; font-family: 'JetBrains Mono', monospace; font-weight: 800; font-size: 0.75rem; cursor: pointer; text-transform: uppercase; transition: 0.2s;">Akceptuj</button>
-            <button id="rejectCookies" style="background: rgba(255,255,255,0.05); color: #f1f5f9; border: 1px solid rgba(255,255,255,0.1); padding: 10px 14px; border-radius: 6px; font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; cursor: pointer; transition: 0.2s;">Odrzuć</button>
+        <div style="display: flex; gap: 10px;">
+            <button id="acceptCookies" style="background: var(--accent-contrast); color: #030305; border: none; padding: 8px 14px; border-radius: 6px; font-family: 'JetBrains Mono', monospace; font-weight: 800; font-size: 0.75rem; cursor: pointer;">Akceptuj</button>
+            <button id="rejectCookies" style="background: rgba(255,255,255,0.05); color: #f1f5f9; border: 1px solid rgba(255,255,255,0.1); padding: 8px 12px; border-radius: 6px; font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; cursor: pointer;">Odrzuć</button>
         </div>
     </div>
 
@@ -345,27 +136,25 @@
         <div class="footer-grid">
             <div class="footer-col">
                 <h4 style="color: var(--accent-contrast);">PC_HUB_</h4>
-                <p>Niezależne centrum sprzętowe, testy wydajności, optymalizacja termiczna jednostek PC oraz autorskie konfiguracje custom.</p>
+                <p>Niezależne centrum sprzętowe DevLabStudy, testy wydajności (benchmarks) oraz autorskie konfiguracje jednostek komputerowych.</p>
             </div>
             <div class="footer-col">
                 <h4>Nawigacja</h4>
                 <ul>
                     <li><a href="/">Strona Główna (Hub)</a></li>
-                    <li><a href="/pc-hub">Strona PC Hub</a></li>
-                    <li><a href="/newsy">Aktualności & Newsy</a></li>
-                    <li><a href="/homelab">Infrastruktura HomeLab</a></li>
+                    <li><a href="/pc-hub">Sekcja Testów PC</a></li>
+                    <li><a href="/kontakt">Zamów Wycenę PC</a></li>
                 </ul>
             </div>
             <div class="footer-col">
-                <h4>Partnerzy & Usługi</h4>
+                <h4>Partnerzy</h4>
                 <ul>
-                    <li><a href="/webcraft">WebCraft Studio (Strony WWW)</a></li>
-                    <li><a href="/kontakt">Zamów Składanie PC</a></li>
-                    <li><a href="/pc-hub">Wydajność i Benchmarks</a></li>
+                    <li><a href="https://devlabstudy.ovh">DevLabStudy Central</a></li>
+                    <li><a href="https://www.vinted.pl/member/306118036" target="_blank">Sklep / Vinted</a></li>
                 </ul>
             </div>
             <div class="footer-col">
-                <h4>Kanały Projektu</h4>
+                <h4>Kanały</h4>
                 <div class="social-icons-grid">
                     <a href="https://www.youtube.com/channel/UCaTfVaE8Pb95CZvblqjNheA" target="_blank" class="social-icon-btn" title="YouTube PC Hub">
                         <svg viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
@@ -379,98 +168,33 @@
         
         <div class="footer-divider"></div>
 
-        <div class="footer-sublinks-bar">
-            <a href="/">Sitemap</a>
-            <a href="/pc-hub">PC Hub Main</a>
-            <a href="/polityka-prywatnosci">Privacy Policy</a>
-            <a href="/kontakt">Contact &amp; Support</a>
-        </div>
-
         <div class="footer-meta-bar">
-            <div>Page Last Updated: <span>October 24, 2026</span></div>
-            <div>Page Editor: <span>Tobiasz Kajzer</span></div>
-            <div>Project Official: <span>PC Hub Administrator</span></div>
+            <div>Last Updated: <span>October 24, 2026</span></div>
+            <div>Author: <span>Tobiasz Kajzer</span></div>
+            <div>Domain: <span>devlabstudy.ovh</span></div>
         </div>
     </footer>
 
     <script>
-        window.addEventListener('DOMContentLoaded', () => {
-            const navCenter = document.getElementById('navCenter');
-            const indicator = document.getElementById('navIndicator');
-            const activeLink = navCenter.querySelector('.nav-link-btn.active-page') || navCenter.querySelector('.nav-link-btn');
-            const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const cookieBanner = document.getElementById('cookieBanner');
+        const acceptBtn = document.getElementById('acceptCookies');
+        const rejectBtn = document.getElementById('rejectCookies');
 
-            if (mobileMenuBtn && navCenter) {
-                mobileMenuBtn.addEventListener('click', () => {
-                    navCenter.classList.toggle('mobile-active');
-                });
-            }
-
-            function positionIndicator(targetEl, enableAnimation = true) {
-                if (!targetEl || window.innerWidth <= 1024) return;
-                
-                const parentRect = navCenter.getBoundingClientRect();
-                const targetRect = targetEl.getBoundingClientRect();
-                const leftOffset = targetRect.left - parentRect.left;
-                const targetWidth = targetRect.width;
-
-                if (enableAnimation) {
-                    indicator.classList.add('animated');
-                } else {
-                    indicator.classList.remove('animated');
-                }
-
-                indicator.style.width = `${targetWidth}px`;
-                indicator.style.transform = `translateX(${leftOffset}px)`;
-                indicator.style.opacity = '1';
-            }
-
-            document.fonts.ready.then(() => {
-                positionIndicator(activeLink, false);
+        if (cookieBanner && !localStorage.getItem('cookieConsent')) {
+            cookieBanner.style.display = 'flex';
+        }
+        if (acceptBtn) {
+            acceptBtn.addEventListener('click', () => {
+                localStorage.setItem('cookieConsent', 'accepted');
+                cookieBanner.style.display = 'none';
             });
-
-            const mainNavBtns = navCenter.querySelectorAll(':scope > .nav-link-btn');
-            mainNavBtns.forEach(item => {
-                item.addEventListener('mouseenter', () => {
-                    if (window.innerWidth > 1024) positionIndicator(item, true);
-                });
+        }
+        if (rejectBtn) {
+            rejectBtn.addEventListener('click', () => {
+                localStorage.setItem('cookieConsent', 'rejected');
+                cookieBanner.style.display = 'none';
             });
-
-            navCenter.addEventListener('mouseleave', () => {
-                if (window.innerWidth > 1024) positionIndicator(activeLink, true);
-            });
-
-            window.addEventListener('resize', () => {
-                if (window.innerWidth > 1024) {
-                    positionIndicator(activeLink, false);
-                } else {
-                    indicator.style.opacity = '0';
-                }
-            });
-
-            // Obsługa banneru Cookies (RODO)
-            const cookieBanner = document.getElementById('cookieBanner');
-            const acceptBtn = document.getElementById('acceptCookies');
-            const rejectBtn = document.getElementById('rejectCookies');
-
-            if (cookieBanner && !localStorage.getItem('cookieConsent')) {
-                cookieBanner.style.display = 'flex';
-            }
-
-            if (acceptBtn) {
-                acceptBtn.addEventListener('click', () => {
-                    localStorage.setItem('cookieConsent', 'accepted');
-                    cookieBanner.style.display = 'none';
-                });
-            }
-
-            if (rejectBtn) {
-                rejectBtn.addEventListener('click', () => {
-                    localStorage.setItem('cookieConsent', 'rejected');
-                    cookieBanner.style.display = 'none';
-                });
-            }
-        });
+        }
     </script>
 </body>
 </html>
