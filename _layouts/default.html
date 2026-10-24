@@ -2,7 +2,7 @@
 <html lang="pl">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
     <title>{% if page.title %}{{ page.title }}{% else %}DevLabStudy | PCHub{% endif %}</title>
     
     <!-- FAVICON Z ASSETS/IMG/LOGO.PNG -->
@@ -26,6 +26,11 @@
 
         * { box-sizing: border-box; margin: 0; padding: 0; }
 
+        html, body {
+            overflow-x: hidden;
+            width: 100%;
+        }
+
         body {
             background-color: var(--bg-base);
             color: var(--text-main);
@@ -45,6 +50,8 @@
             justify-content: space-between;
             align-items: center;
             border-bottom: 1px solid var(--border-subtle);
+            flex-wrap: wrap;
+            gap: 15px;
         }
 
         .logo-container {
@@ -66,11 +73,17 @@
             font-size: 1.1rem;
             color: #fff;
             text-transform: uppercase;
+            letter-spacing: -0.5px;
         }
 
         .logo-text span { color: var(--accent-orange); }
 
-        nav { display: flex; gap: 1.2rem; }
+        nav { 
+            display: flex; 
+            gap: 1.2rem; 
+            flex-wrap: wrap;
+            align-items: center;
+        }
 
         nav a {
             color: var(--text-muted);
@@ -79,6 +92,7 @@
             font-size: 0.8rem;
             font-weight: 700;
             transition: color 0.2s;
+            white-space: nowrap;
         }
 
         nav a:hover { color: var(--accent-orange); }
@@ -100,6 +114,38 @@
             color: var(--text-muted);
             background: #050507;
             margin-top: auto;
+        }
+
+        /* MOBILE RESPONSIVE ADAPTATION */
+        @media (max-width: 768px) {
+            header {
+                padding: 1rem;
+                justify-content: center;
+                text-align: center;
+            }
+
+            .logo-container {
+                margin-bottom: 4px;
+            }
+
+            nav {
+                justify-content: center;
+                gap: 0.8rem 1.2rem;
+                width: 100%;
+            }
+
+            nav a {
+                font-size: 0.75rem;
+            }
+
+            main {
+                padding: 1.2rem 1rem;
+            }
+
+            footer {
+                padding: 1.5rem 1rem;
+                font-size: 0.7rem;
+            }
         }
     </style>
 
