@@ -1,48 +1,51 @@
 ---
 layout: default
-title: DevLabStudy | PCHub
+title: PCHUB by devlabstudy | Wyszukiwarka Zestawów
 url: /
 ---
 
 <style>
-    /* MAIN CONTAINER STYLING */
     :root {
         --ph-orange: #ff9900;
         --ph-dark-bg: #0e0e0e;
         --ph-card-bg: #1b1b1b;
         --ph-border: #2a2a2a;
+        --ph-blue: #00d2ff;
+        --ph-purple: #a855f7;
     }
 
-    /* HERO SECTION */
     .hero-section {
         text-align: center;
         max-width: 900px;
-        margin: 30px auto 50px auto;
+        margin: 30px auto 40px auto;
     }
 
-    /* LOGO BADGE STYLE (PCHUB BADGE) */
     .hub-logo-container {
         display: inline-flex;
         align-items: center;
         font-family: 'JetBrains Mono', monospace;
-        font-size: 3.2rem;
+        font-size: 3.5rem;
         font-weight: 900;
         letter-spacing: -1.5px;
         user-select: none;
-        margin-bottom: 15px;
+        margin-bottom: 5px;
     }
 
-    .hub-text-left {
-        color: #ffffff;
-        padding-right: 6px;
-    }
-
+    .hub-text-left { color: #ffffff; padding-right: 6px; }
     .hub-badge-right {
         background: var(--ph-orange);
         color: #000000;
-        padding: 2px 12px;
+        padding: 2px 14px;
         border-radius: 8px;
         font-weight: 900;
+    }
+
+    .hero-author {
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 0.95rem;
+        color: #888888;
+        margin-bottom: 15px;
+        font-weight: 600;
     }
 
     .hero-tag {
@@ -62,193 +65,300 @@ url: /
 
     .hero-desc {
         color: #999999;
-        font-size: 1.05rem;
-        line-height: 1.7;
+        font-size: 1.02rem;
+        line-height: 1.6;
         font-family: 'Inter', sans-serif;
     }
 
-    /* NAGŁÓWKI SEKCJI */
-    .section-title {
-        font-family: 'JetBrains Mono', monospace;
-        font-size: 0.9rem;
-        color: var(--ph-orange);
-        text-transform: uppercase;
-        margin: 40px 0 20px 0;
-        font-weight: 800;
-        letter-spacing: 1.5px;
-        display: flex;
-        align-items: center;
-        gap: 12px;
-    }
-    .section-title::after {
-        content: ''; 
-        flex: 1; 
-        height: 1px; 
-        background: var(--ph-border);
-    }
-
-    /* KARTA WYBUDOWANEGO PROJEKTU */
-    .project-card {
+    /* KONTENER FILTRÓW I TAGÓW */
+    .filter-panel {
         background: var(--ph-card-bg);
         border: 1px solid var(--ph-border);
         border-radius: 12px;
-        padding: 30px;
-        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+        padding: 20px;
+        margin-bottom: 30px;
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .filter-row {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        flex-wrap: wrap;
+    }
+
+    .filter-label {
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 0.75rem;
+        color: var(--ph-orange);
+        text-transform: uppercase;
+        font-weight: 800;
+        min-width: 140px;
+    }
+
+    .filter-chip {
+        background: #121212;
+        border: 1px solid var(--ph-border);
+        color: #aaa;
+        padding: 6px 14px;
+        border-radius: 20px;
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 0.75rem;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        user-select: none;
+    }
+
+    .filter-chip:hover { border-color: var(--ph-orange); color: #fff; }
+    
+    .filter-chip.active {
+        background: var(--ph-orange);
+        color: #000;
+        border-color: var(--ph-orange);
+        font-weight: 800;
+    }
+
+    .filter-chip.active-blue {
+        background: var(--ph-blue);
+        color: #000;
+        border-color: var(--ph-blue);
+        font-weight: 800;
+    }
+
+    /* TAGI NA KARTACH */
+    .tag-badge {
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 0.65rem;
+        font-weight: 800;
+        padding: 3px 8px;
+        border-radius: 4px;
+        text-transform: uppercase;
+    }
+    .tag-gaming { background: rgba(0, 210, 255, 0.15); color: #00d2ff; border: 1px solid rgba(0, 210, 255, 0.3); }
+    .tag-office { background: rgba(16, 185, 129, 0.15); color: #10b981; border: 1px solid rgba(16, 185, 129, 0.3); }
+    .tag-retro { background: rgba(168, 85, 247, 0.15); color: #a855f7; border: 1px solid rgba(168, 85, 247, 0.3); }
+    .tag-homelab { background: rgba(255, 153, 0, 0.15); color: #ff9900; border: 1px solid rgba(255, 153, 0, 0.3); }
+
+    /* KARTY KOMPUTERÓW */
+    .pc-grid { display: flex; flex-direction: column; gap: 25px; }
+
+    .pc-card {
+        background: var(--ph-card-bg);
+        border: 1px solid var(--ph-border);
+        border-radius: 12px;
+        padding: 25px;
         position: relative;
         overflow: hidden;
-        transition: all 0.25s ease;
-    }
-    
-    .project-card::before {
-        content: ''; 
-        position: absolute; 
-        top: 0; 
-        left: 0; 
-        width: 4px; 
-        height: 100%;
-        background: var(--ph-orange);
+        transition: border-color 0.25s;
     }
 
-    .project-card:hover {
-        border-color: var(--ph-orange);
-        transform: translateY(-2px);
-        box-shadow: 0 12px 35px rgba(255, 153, 0, 0.15);
+    .pc-card::before {
+        content: ''; position: absolute; top: 0; left: 0; width: 4px; height: 100%;
+        background: var(--ph-border); transition: background 0.2s;
     }
 
-    .project-header {
+    .pc-card:hover { border-color: var(--ph-orange); }
+    .pc-card:hover::before { background: var(--ph-orange); }
+
+    .pc-header {
         display: flex;
         justify-content: space-between;
         align-items: center;
-        margin-bottom: 18px;
         flex-wrap: wrap;
-        gap: 12px;
+        gap: 10px;
+        margin-bottom: 12px;
     }
 
-    .project-name {
+    .pc-title-area { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+    .pc-title { font-family: 'JetBrains Mono', monospace; font-size: 1.3rem; font-weight: 900; color: #fff; }
+
+    .pc-price-tag {
         font-family: 'JetBrains Mono', monospace;
-        font-size: 1.5rem;
+        font-size: 1.1rem;
         font-weight: 900;
-        color: #ffffff;
-    }
-
-    .status-badge {
-        font-family: 'JetBrains Mono', monospace;
-        font-size: 0.7rem;
-        background: rgba(16, 185, 129, 0.15);
-        color: #10b981;
-        border: 1px solid rgba(16, 185, 129, 0.3);
-        padding: 5px 12px;
+        background: rgba(255, 153, 0, 0.15);
+        color: var(--ph-orange);
+        border: 1px solid rgba(255, 153, 0, 0.3);
+        padding: 4px 12px;
         border-radius: 6px;
-        font-weight: 800;
-        text-transform: uppercase;
     }
 
-    /* SIATKA SPECYFIKACJI */
-    .specs-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-        gap: 15px;
-        margin: 25px 0;
+    /* TABELA CZĘŚCI */
+    .parts-table-wrapper { margin: 15px 0; overflow-x: auto; }
+
+    .parts-table {
+        width: 100%;
+        border-collapse: collapse;
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 0.78rem;
         background: #121212;
-        padding: 20px;
         border-radius: 8px;
+        overflow: hidden;
         border: 1px solid var(--ph-border);
     }
 
-    .spec-item {
-        display: flex;
-        flex-direction: column;
-        gap: 4px;
-    }
-
-    .spec-label {
-        font-family: 'JetBrains Mono', monospace;
-        font-size: 0.7rem;
-        color: #777777;
+    .parts-table th {
+        background: #181818;
+        color: var(--ph-orange);
+        padding: 10px 14px;
+        text-align: left;
+        border-bottom: 1px solid var(--ph-border);
         text-transform: uppercase;
     }
 
-    .spec-value {
-        color: #ffffff;
-        font-weight: 700;
-        font-size: 0.92rem;
+    .parts-table td {
+        padding: 10px 14px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        color: #ccc;
     }
 
-    /* BUTTON AKCJI */
-    .btn-action {
+    .btn-details {
         display: inline-flex;
         align-items: center;
         gap: 8px;
         background: var(--ph-orange);
-        color: #000000;
-        padding: 12px 24px;
-        border-radius: 8px;
+        color: #000;
+        padding: 10px 20px;
+        border-radius: 6px;
         font-family: 'JetBrains Mono', monospace;
         font-weight: 900;
-        font-size: 0.82rem;
+        font-size: 0.78rem;
         text-transform: uppercase;
-        transition: all 0.2s ease;
         text-decoration: none;
+        margin-top: 10px;
+        transition: 0.2s;
     }
-
-    .btn-action:hover {
-        background: #ffa826;
-        box-shadow: 0 0 15px rgba(255, 153, 0, 0.4);
-    }
+    .btn-details:hover { background: #ffa826; }
 
     @media (max-width: 768px) {
-        .hub-logo-container { font-size: 2.2rem; }
-        .project-card { padding: 20px; }
+        .hub-logo-container { font-size: 2.3rem; }
+        .filter-label { min-width: 100%; margin-bottom: 4px; }
     }
 </style>
 
 <!-- HERO SECTION -->
 <section class="hero-section">
-    <div class="hero-tag">// DEVLABSTUDY HARDWARE REPOSITORY</div>
+    <div class="hero-tag">// HARDWARE REPOSITORY &amp; FILTER</div>
     <br>
     <div class="hub-logo-container">
         <span class="hub-text-left">PC</span><span class="hub-badge-right">HUB</span>
     </div>
+    <div class="hero-author">by devlabstudy</div>
     <p class="hero-desc">
-        Główna baza budowanych projektów PC, skrupulatnej diagnostyki sprzętowej oraz bezstronnych testów wydajnościowych zestawów.
+        Baza autorskich projektów komputerowych. Filtruj jednostki według ich przeznaczenia (Retro, Gaming, Office) oraz budżetu.
     </p>
 </section>
 
-<!-- SEKCJA WYBUDOWANEGO PROJEKTU -->
-<div class="section-title">// OSTATNIO PRZETESTOWANE ZESTAWY</div>
-
-<div class="project-card">
-    <div class="project-header">
-        <div class="project-name">PROJEKT #1: BUDGET 1080P RIG</div>
-        <div class="status-badge">ZAKOŃCZONY & PRZETESTOWANY</div>
+<!-- PANEL FILTRÓW -->
+<div class="filter-panel">
+    <!-- FILTR PRZEZNACZENIA (TAGI) -->
+    <div class="filter-row">
+        <span class="filter-label">Kategoria / Typ:</span>
+        <div class="filter-chip active-blue" onclick="setCategoryFilter('all', this)">Wszystkie</div>
+        <div class="filter-chip" onclick="setCategoryFilter('gaming', this)">🎮 Gaming 1080p</div>
+        <div class="filter-chip" onclick="setCategoryFilter('office', this)">💼 Biuro / Nauka</div>
+        <div class="filter-chip" onclick="setCategoryFilter('retro', this)">🕹️ Retro / Vintage</div>
+        <div class="filter-chip" onclick="setCategoryFilter('homelab', this)">🗄️ Homelab / Serwer</div>
     </div>
 
-    <p style="color: #aaaaaa; font-size: 0.92rem; line-height: 1.6; margin: 0;">
-        Autorski zestaw budżetowy przeznaczony do płynnej rozgrywki w rozdzielczości 1080p. Przeprowadzone rzetelne testy syntetyczne oraz pomiary kultur pracy.
-    </p>
-
-    <div class="specs-grid">
-        <div class="spec-item">
-            <span class="spec-label">Procesor (CPU)</span>
-            <span class="spec-value">AMD Ryzen 5 1600 AF</span>
-        </div>
-        <div class="spec-item">
-            <span class="spec-label">Karta Graficzna</span>
-            <span class="spec-value">AMD Radeon RX 570 4GB</span>
-        </div>
-        <div class="spec-item">
-            <span class="spec-label">Pamięć RAM</span>
-            <span class="spec-value">16GB DDR4 Dual-Channel</span>
-        </div>
-        <div class="spec-item">
-            <span class="spec-label">Przeznaczenie</span>
-            <span class="spec-value">Gaming 1080p / Homelab Station</span>
-        </div>
-    </div>
-
-    <div style="display: flex; gap: 20px; flex-wrap: wrap; align-items: center;">
-        <a href="https://www.devlabstudy.ovh/testy/komputery/pc-1-ryzen-rx570/" class="btn-action">
-            Zobacz Raport & Galerię →
-        </a>
+    <!-- FILTR BUDŻETU -->
+    <div class="filter-row">
+        <span class="filter-label">Maks. Budżet:</span>
+        <div class="filter-chip active" onclick="setBudgetFilter('all', this)">Bez limitu</div>
+        <div class="filter-chip" onclick="setBudgetFilter(500, this)">do 500 zł</div>
+        <div class="filter-chip" onclick="setBudgetFilter(1000, this)">do 1000 zł</div>
+        <div class="filter-chip" onclick="setBudgetFilter(1500, this)">do 1500 zł</div>
     </div>
 </div>
+
+<!-- KONTENER NA KOMPUTERY GENEROWANY Z DANYCH JEKYLLA -->
+<div class="pc-grid" id="pcGridContainer">
+    {% for pc in site.data.komputery %}
+    <div class="pc-card" data-category="{{ pc.category }}" data-cost="{{ pc.totalCost }}">
+        <div class="pc-header">
+            <div class="pc-title-area">
+                <span class="pc-title">{{ pc.title }}</span>
+                {% if pc.category == 'gaming' %}
+                    <span class="tag-badge tag-gaming">Gaming 1080p</span>
+                {% elsif pc.category == 'office' %}
+                    <span class="tag-badge tag-office">Biuro / Nauka</span>
+                {% elsif pc.category == 'retro' %}
+                    <span class="tag-badge tag-retro">Retro / Vintage</span>
+                {% elsif pc.category == 'homelab' %}
+                    <span class="tag-badge tag-homelab">Homelab / Serwer</span>
+                {% endif %}
+            </div>
+            <div class="pc-price-tag">KOSZT: {{ pc.totalCost }} PLN</div>
+        </div>
+
+        <div class="parts-table-wrapper">
+            <table class="parts-table">
+                <thead>
+                    <tr>
+                        <th>Podzespół</th>
+                        <th>Model / Specyfikacja</th>
+                        <th>Koszt</th>
+                        <th>Źródło</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for part in pc.parts %}
+                    <tr>
+                        <td><strong>{{ part.type }}</strong></td>
+                        <td>{{ part.name }}</td>
+                        <td style="color: var(--ph-orange);">{{ part.price }}</td>
+                        <td style="color: #00d2ff;">{{ part.proof }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        <a href="{{ pc.url }}" class="btn-details">
+            Zobacz Raport i Testy →
+        </a>
+    </div>
+    {% endfor %}
+</div>
+
+<!-- SKRYPT DO SCHOWANIA/POKAZYWANIA KART PRZY FILTROWANIU -->
+<script>
+    let currentCategory = 'all';
+    let currentMaxBudget = 'all';
+
+    function filterCards() {
+        const cards = document.querySelectorAll('.pc-card');
+        let visibleCount = 0;
+
+        cards.forEach(card => {
+            const cat = card.getAttribute('data-category');
+            const cost = parseInt(card.getAttribute('data-cost'));
+
+            const matchCategory = (currentCategory === 'all' || cat === currentCategory);
+            const matchBudget = (currentMaxBudget === 'all' || cost <= currentMaxBudget);
+
+            if (matchCategory && matchBudget) {
+                card.style.display = 'block';
+                visibleCount++;
+            } else {
+                card.style.display = 'none';
+            }
+        });
+    }
+
+    function setCategoryFilter(cat, el) {
+        document.querySelectorAll('.filter-row:first-child .filter-chip').forEach(c => c.classList.remove('active-blue'));
+        el.classList.add('active-blue');
+        currentCategory = cat;
+        filterCards();
+    }
+
+    function setBudgetFilter(budget, el) {
+        document.querySelectorAll('.filter-row:last-child .filter-chip').forEach(c => c.classList.remove('active'));
+        el.classList.add('active');
+        currentMaxBudget = budget;
+        filterCards();
+    }
+</script>
