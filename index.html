@@ -1,53 +1,77 @@
 ---
 layout: default
-title: DevLabStudy | PC Hub & Hardware
+title: DevLabStudy | PCHub
 url: /
 ---
 
 <style>
+    /* MAIN CONTAINER STYLING */
+    :root {
+        --ph-orange: #ff9900;
+        --ph-dark-bg: #0e0e0e;
+        --ph-card-bg: #1b1b1b;
+        --ph-border: #2a2a2a;
+    }
+
     /* HERO SECTION */
     .hero-section {
         text-align: center;
         max-width: 900px;
-        margin: 20px auto 50px auto;
+        margin: 30px auto 50px auto;
+    }
+
+    /* LOGO BADGE STYLE (PCHUB BADGE) */
+    .hub-logo-container {
+        display: inline-flex;
+        align-items: center;
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 3.2rem;
+        font-weight: 900;
+        letter-spacing: -1.5px;
+        user-select: none;
+        margin-bottom: 15px;
+    }
+
+    .hub-text-left {
+        color: #ffffff;
+        padding-right: 6px;
+    }
+
+    .hub-badge-right {
+        background: var(--ph-orange);
+        color: #000000;
+        padding: 2px 12px;
+        border-radius: 8px;
+        font-weight: 900;
     }
 
     .hero-tag {
         font-family: 'JetBrains Mono', monospace;
         font-size: 0.75rem;
-        background: rgba(255, 153, 0, 0.1);
-        color: #ff9900;
+        background: rgba(255, 153, 0, 0.12);
+        color: var(--ph-orange);
         padding: 6px 14px;
-        border-radius: 20px;
+        border-radius: 6px;
         border: 1px solid rgba(255, 153, 0, 0.3);
         font-weight: 800;
         text-transform: uppercase;
         letter-spacing: 2px;
         display: inline-block;
-        margin-bottom: 15px;
+        margin-bottom: 20px;
     }
-
-    .hero-title {
-        font-size: 3.5rem;
-        font-weight: 900;
-        font-family: 'JetBrains Mono', monospace;
-        color: #fff;
-        margin: 0 0 15px 0;
-        letter-spacing: -1.5px;
-    }
-    .hero-title span { color: #ff9900; }
 
     .hero-desc {
-        color: #a0aec0;
-        font-size: 1.1rem;
+        color: #999999;
+        font-size: 1.05rem;
         line-height: 1.7;
+        font-family: 'Inter', sans-serif;
     }
 
     /* NAGŁÓWKI SEKCJI */
     .section-title {
         font-family: 'JetBrains Mono', monospace;
-        font-size: 0.88rem;
-        color: #ff9900;
+        font-size: 0.9rem;
+        color: var(--ph-orange);
         text-transform: uppercase;
         margin: 40px 0 20px 0;
         font-weight: 800;
@@ -57,48 +81,59 @@ url: /
         gap: 12px;
     }
     .section-title::after {
-        content: ''; flex: 1; height: 1px; background: rgba(255, 255, 255, 0.08);
+        content: ''; 
+        flex: 1; 
+        height: 1px; 
+        background: var(--ph-border);
     }
 
     /* KARTA WYBUDOWANEGO PROJEKTU */
     .project-card {
-        background: rgba(15, 23, 42, 0.75);
-        border: 1px solid rgba(255, 153, 0, 0.3);
-        border-radius: 16px;
-        padding: 35px;
-        backdrop-filter: blur(12px);
-        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+        background: var(--ph-card-bg);
+        border: 1px solid var(--ph-border);
+        border-radius: 12px;
+        padding: 30px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
         position: relative;
         overflow: hidden;
-        transition: all 0.3s ease;
+        transition: all 0.25s ease;
     }
+    
     .project-card::before {
-        content: ''; position: absolute; top: 0; left: 0; width: 4px; height: 100%;
-        background: #ff9900;
+        content: ''; 
+        position: absolute; 
+        top: 0; 
+        left: 0; 
+        width: 4px; 
+        height: 100%;
+        background: var(--ph-orange);
     }
+
     .project-card:hover {
-        border-color: #ff9900;
-        transform: translateY(-3px);
-        box-shadow: 0 15px 35px rgba(255, 153, 0, 0.15);
+        border-color: var(--ph-orange);
+        transform: translateY(-2px);
+        box-shadow: 0 12px 35px rgba(255, 153, 0, 0.15);
     }
 
     .project-header {
         display: flex;
         justify-content: space-between;
         align-items: center;
-        margin-bottom: 20px;
+        margin-bottom: 18px;
         flex-wrap: wrap;
-        gap: 10px;
+        gap: 12px;
     }
+
     .project-name {
         font-family: 'JetBrains Mono', monospace;
-        font-size: 1.6rem;
+        font-size: 1.5rem;
         font-weight: 900;
-        color: #fff;
+        color: #ffffff;
     }
+
     .status-badge {
         font-family: 'JetBrains Mono', monospace;
-        font-size: 0.72rem;
+        font-size: 0.7rem;
         background: rgba(16, 185, 129, 0.15);
         color: #10b981;
         border: 1px solid rgba(16, 185, 129, 0.3);
@@ -108,70 +143,79 @@ url: /
         text-transform: uppercase;
     }
 
+    /* SIATKA SPECYFIKACJI */
     .specs-grid {
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
         gap: 15px;
         margin: 25px 0;
-        background: rgba(0, 0, 0, 0.3);
+        background: #121212;
         padding: 20px;
-        border-radius: 10px;
-        border: 1px solid rgba(255, 255, 255, 0.05);
+        border-radius: 8px;
+        border: 1px solid var(--ph-border);
     }
+
     .spec-item {
         display: flex;
         flex-direction: column;
         gap: 4px;
     }
+
     .spec-label {
         font-family: 'JetBrains Mono', monospace;
-        font-size: 0.72rem;
-        color: #8b9bb4;
+        font-size: 0.7rem;
+        color: #777777;
         text-transform: uppercase;
     }
+
     .spec-value {
-        color: #fff;
+        color: #ffffff;
         font-weight: 700;
-        font-size: 0.95rem;
+        font-size: 0.92rem;
     }
 
+    /* BUTTON AKCJI */
     .btn-action {
         display: inline-flex;
         align-items: center;
         gap: 8px;
-        background: #ff9900;
-        color: #030305;
+        background: var(--ph-orange);
+        color: #000000;
         padding: 12px 24px;
         border-radius: 8px;
         font-family: 'JetBrains Mono', monospace;
         font-weight: 900;
-        font-size: 0.85rem;
+        font-size: 0.82rem;
         text-transform: uppercase;
-        transition: 0.2s;
+        transition: all 0.2s ease;
         text-decoration: none;
     }
+
     .btn-action:hover {
-        background: #ffb703;
-        box-shadow: 0 4px 15px rgba(255, 153, 0, 0.3);
+        background: #ffa826;
+        box-shadow: 0 0 15px rgba(255, 153, 0, 0.4);
     }
 
     @media (max-width: 768px) {
-        .hero-title { font-size: 2.3rem; }
+        .hub-logo-container { font-size: 2.2rem; }
         .project-card { padding: 20px; }
     }
 </style>
 
-<!-- HERO -->
+<!-- HERO SECTION -->
 <section class="hero-section">
-    <div class="hero-tag">// DEVLABSTUDY HARDWARE HUB</div>
-    <h1 class="hero-title">PC <span>HUB</span></h1>
+    <div class="hero-tag">// DEVLABSTUDY HARDWARE REPOSITORY</div>
+    <br>
+    <div class="hub-logo-container">
+        <span class="hub-text-left">PC</span><span class="hub-badge-right">HUB</span>
+    </div>
     <p class="hero-desc">
-        Centrum sprzętowe DevLabStudy. Składanie, optymalizacja termiczna oraz rzetelne testy wydajności budżetowych zestawów PC.
+        Główna baza budowanych projektów PC, skrupulatnej diagnostyki sprzętowej oraz bezstronnych testów wydajnościowych zestawów.
     </p>
 </section>
 
 <!-- SEKCJA WYBUDOWANEGO PROJEKTU -->
-<div class="section-title">// ZAKOŃCZONE PROJEKTY SPRZĘTOWE</div>
+<div class="section-title">// OSTATNIO PRZETESTOWANE ZESTAWY</div>
 
 <div class="project-card">
     <div class="project-header">
@@ -179,8 +223,8 @@ url: /
         <div class="status-badge">ZAKOŃCZONY & PRZETESTOWANY</div>
     </div>
 
-    <p style="color: #94a3b8; font-size: 0.95rem; line-height: 1.6; margin: 0;">
-        Autorski zestaw budżetowy do płynnej rozgrywki w 1080p. Przeprowadzone szczegółowe testy wydajności w benchmarkach gier z analizą czasów klatek oraz narzutu API.
+    <p style="color: #aaaaaa; font-size: 0.92rem; line-height: 1.6; margin: 0;">
+        Autorski zestaw budżetowy przeznaczony do płynnej rozgrywki w rozdzielczości 1080p. Przeprowadzone rzetelne testy syntetyczne oraz pomiary kultur pracy.
     </p>
 
     <div class="specs-grid">
@@ -197,17 +241,14 @@ url: /
             <span class="spec-value">16GB DDR4 Dual-Channel</span>
         </div>
         <div class="spec-item">
-            <span class="spec-label">Testowane API</span>
-            <span class="spec-value">DirectX 11 / DX12 / Vulkan</span>
+            <span class="spec-label">Przeznaczenie</span>
+            <span class="spec-value">Gaming 1080p / Homelab Station</span>
         </div>
     </div>
 
-    <div style="display: flex; gap: 15px; flex-wrap: wrap; align-items: center;">
-        <a href="devlabstudy.ovh/testy/komputery/pc-1-ryzen-rx570/" class="btn-action">
-            Zobacz Pełne Testy & Wykresy FPS →
-        </a>
-        <a href="https://docs.google.com/spreadsheets/d/1GMMc10XlskFInmbTKB7hcKNn2OJyGuYpqa3EziS6nM" target="_blank" style="color: #8b9bb4; font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; text-decoration: underline;">
-            Otwórz Arkusz Google
+    <div style="display: flex; gap: 20px; flex-wrap: wrap; align-items: center;">
+        <a href="/testy/komputery/pc-1-ryzen-rx570/" class="btn-action">
+            Zobacz Raport & Galerię →
         </a>
     </div>
 </div>
