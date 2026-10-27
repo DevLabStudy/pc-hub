@@ -5,13 +5,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
     <title>{% if page.title %}{{ page.title }}{% else %}DevLabStudy | PCHub{% endif %}</title>
     
-    <!-- Google tag (gtag.js) - Google Analytics -->
+    <!-- Google tag (gtag.js) - Google Analytics z Consent Mode v2 -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-V0CPE4RVED"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
 
+      // Domyślna blokada śledzenia analitycznego przed decyzją użytkownika
+      gtag('consent', 'default', {
+        'analytics_storage': 'denied'
+      });
+
+      gtag('js', new Date());
       gtag('config', 'G-V0CPE4RVED');
     </script>
 
@@ -68,6 +73,50 @@
             color: var(--text-muted);
             background: #050507;
             margin-top: auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.8rem;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 1.2rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .footer-links a {
+            color: var(--accent-orange);
+            text-decoration: none;
+            cursor: pointer;
+            transition: opacity 0.2s ease;
+        }
+
+        .footer-links a:hover {
+            opacity: 0.85;
+            text-decoration: underline;
+        }
+
+        /* STYL BANERU COOKIES / RODO FOR PC HUB */
+        #cookieBanner {
+            display: none;
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            right: 20px;
+            max-width: 720px;
+            margin: 0 auto;
+            background: rgba(10, 10, 12, 0.97);
+            border: 1px solid var(--border-subtle);
+            backdrop-filter: blur(16px);
+            padding: 22px 26px;
+            border-radius: 12px;
+            z-index: 9999;
+            box-shadow: 0 15px 45px rgba(0,0,0,0.85);
+            align-items: center;
+            gap: 20px;
+            flex-wrap: wrap;
         }
 
         /* MOBILE RESPONSIVE ADAPTATION */
@@ -79,6 +128,13 @@
             footer {
                 padding: 1.5rem 1rem;
                 font-size: 0.7rem;
+            }
+
+            #cookieBanner {
+                bottom: 10px;
+                left: 10px;
+                right: 10px;
+                padding: 16px;
             }
         }
     </style>
@@ -93,9 +149,89 @@
         {{ content }}
     </main>
 
+    <!-- BANNER COOKIES / RODO -->
+    <div id="cookieBanner">
+        <div style="flex: 1; min-width: 280px;">
+            <div style="font-family: var(--font-mono); font-size: 0.75rem; color: var(--accent-orange); text-transform: uppercase; margin-bottom: 6px; font-weight: 700; letter-spacing: 0.5px;">// Prywatność &amp; Pliki Cookies</div>
+            <p style="color: var(--text-muted); font-size: 0.82rem; line-height: 1.55; margin: 0; font-family: var(--font-sans);">
+                Serwis PC Hub używa plików cookies niezbędnych do działania strony oraz opcjonalnych ciasteczek Google Analytics w celach statystycznych.
+            </p>
+        </div>
+        
+        <div style="display: flex; gap: 8px; flex-wrap: wrap; align-items: center; justify-content: flex-end; width: 100%;">
+            <button id="btnAcceptNecessary" style="background: rgba(255,255,255,0.06); color: var(--text-main); border: 1px solid rgba(255,255,255,0.15); padding: 9px 14px; border-radius: 6px; font-family: var(--font-mono); font-size: 0.72rem; font-weight: 700; cursor: pointer; transition: 0.2s;">Wymagane tylko</button>
+            <button id="btnRejectAll" style="background: rgba(255, 153, 0, 0.1); color: var(--accent-orange); border: 1px solid rgba(255, 153, 0, 0.3); padding: 9px 14px; border-radius: 6px; font-family: var(--font-mono); font-size: 0.72rem; font-weight: 700; cursor: pointer; transition: 0.2s;">Odrzuć opcjonalne</button>
+            <button id="btnAcceptAll" style="background: var(--accent-orange); color: #0a0a0c; border: none; padding: 10px 18px; border-radius: 6px; font-family: var(--font-mono); font-weight: 800; font-size: 0.75rem; cursor: pointer; text-transform: uppercase; transition: 0.2s; box-shadow: 0 0 15px rgba(255, 153, 0, 0.3);">Akceptuj wszystkie</button>
+        </div>
+    </div>
+
     <footer>
+        <div class="footer-links">
+            <a href="/polityka-prywatnosci-pchub.md" download="polityka-prywatnosci-pchub.md">Polityka Prywatności (.md)</a>
+            <a href="/cookies-pchub.md" download="cookies-pchub.md">Polityka Cookies (.md)</a>
+            <a id="openCookieSettings">// Ustawienia Cookies</a>
+        </div>
         <p>&copy; {{ 'now' | date: "%Y" }} DevLabStudy &bull; Hardware &amp; Homelab Repository</p>
     </footer>
 
+    <!-- SKRYPT LOGIKI ZGÓD COOKIES -->
+    <script>
+        const cookieBanner = document.getElementById('cookieBanner');
+        const btnAcceptAll = document.getElementById('btnAcceptAll');
+        const btnRejectAll = document.getElementById('btnRejectAll');
+        const btnAcceptNecessary = document.getElementById('btnAcceptNecessary');
+        const openSettingsLink = document.getElementById('openCookieSettings');
+
+        function updateGtagConsent(analyticsGranted) {
+            if (typeof gtag === 'function') {
+                gtag('consent', 'update', {
+                    'analytics_storage': analyticsGranted ? 'granted' : 'denied'
+                });
+            }
+        }
+
+        const currentConsent = localStorage.getItem('pchub_cookie_consent');
+
+        if (!currentConsent) {
+            setTimeout(() => {
+                if (cookieBanner) cookieBanner.style.display = 'flex';
+            }, 200);
+        } else if (currentConsent === 'all') {
+            updateGtagConsent(true);
+        } else {
+            updateGtagConsent(false);
+        }
+
+        if (btnAcceptAll) {
+            btnAcceptAll.addEventListener('click', () => {
+                localStorage.setItem('pchub_cookie_consent', 'all');
+                updateGtagConsent(true);
+                if (cookieBanner) cookieBanner.style.display = 'none';
+            });
+        }
+
+        if (btnRejectAll) {
+            btnRejectAll.addEventListener('click', () => {
+                localStorage.setItem('pchub_cookie_consent', 'rejected');
+                updateGtagConsent(false);
+                if (cookieBanner) cookieBanner.style.display = 'none';
+            });
+        }
+
+        if (btnAcceptNecessary) {
+            btnAcceptNecessary.addEventListener('click', () => {
+                localStorage.setItem('pchub_cookie_consent', 'necessary');
+                updateGtagConsent(false);
+                if (cookieBanner) cookieBanner.style.display = 'none';
+            });
+        }
+
+        if (openSettingsLink) {
+            openSettingsLink.addEventListener('click', (e) => {
+                e.preventDefault();
+                if (cookieBanner) cookieBanner.style.display = 'flex';
+            });
+        }
+    </script>
 </body>
 </html>
