@@ -140,10 +140,10 @@
             font-size: 0.8rem;
             font-family: var(--font-mono);
             box-shadow: 0 5px 25px rgba(0, 0, 0, 0.7);
-            max-width: 240px;
+            max-width: 260px;
             text-align: right;
             cursor: pointer;
-            transition: opacity 0.3s ease, transform 0.3s ease;
+            transition: opacity 0.4s ease, transform 0.4s ease;
             backdrop-filter: blur(10px);
         }
 
@@ -291,7 +291,7 @@
             }
 
             .wa-rotating-bubble {
-                display: none; /* Ukryj dymek na małych ekranach, żeby nie zasłaniał widoku */
+                display: none;
             }
 
             .wa-widget-wrapper {
@@ -315,7 +315,7 @@
         {{ content }}
     </main>
 
-    <!-- PŁYWAJĄcy WIDGET WHATSAPP Z ZMIENNYMI PYTANIAMI -->
+    <!-- PŁYWAJĄCY WIDGET WHATSAPP Z TEMATYCZNYMI PYTANIAMI PC -->
     <div class="wa-widget-wrapper">
         <div class="wa-rotating-bubble" id="waBubble" title="Kliknij, aby zapytać">
             <span id="waBubbleCategory">// PCHub Support</span>
@@ -329,20 +329,20 @@
                     <div class="wa-online-dot"></div>
                 </div>
                 <div class="wa-chat-header-info">
-                    <h4>PCHub &amp; Homelab</h4>
-                    <p>Doradztwo PC i sprzęt</p>
+                    <h4>PCHub Expert</h4>
+                    <p>Doradztwo PC i podzespoły</p>
                 </div>
             </div>
             <div class="wa-chat-body">
                 <div class="wa-msg-bubble">
-                    Cześć! Masz pytanie odnośnie konfiguracji PC, podzespołów lub homelabu? Śmiało napisz! 🖥️
+                    Cześć! Składasz komputer lub szukasz opinii o podzespołach? Napisz śmiało! 🖥️
                 </div>
-                <a href="https://wa.me/48334454122?text=Cze%C5%9B%C4%87!%20Potrzebuj%C4%99%20porady%20dotycz%C4%85cej%20komputera%20/%20sprz%C4%99tu." 
+                <a href="https://wa.me/48334454122?text=Cze%C5%9B%C4%87!%20Potrzebuj%C4%99%20porady%20w%20doborze%20części%20do%20komputera." 
                    target="_blank" 
                    rel="noopener noreferrer" 
                    class="wa-start-btn">
                     <svg viewBox="0 0 24 24" style="width: 16px; height: 16px; fill: currentColor;"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981z"/></svg>
-                    Zapytaj o poradę PC
+                    Napisz na WhatsApp
                 </a>
             </div>
         </div>
@@ -377,13 +377,14 @@
         <p>&copy; {{ 'now' | date: "%Y" }} DevLabStudy &bull; Hardware &amp; Homelab Repository</p>
     </footer>
 
-    <!-- SKRYPTY (WHATSAPP, DZYNDZELE & COOKIES) -->
+    <!-- SKRYPTY (WHATSAPP, WOLNIEJSZE DYMKI PC & COOKIES) -->
     <script>
-        // ROTUJĄCE PYTANIA W CHMURCE WHATSAPP
+        // ROZBUDOWANA, WYŁĄCZNIE KOMPUTEROWA LISTA PYTAŃ W CHMURCE (co 7 sekund)
         const bubbleData = [
             { cat: "// Doradztwo PC", text: "Potrzebujesz porady w doborze części?" },
-            { cat: "// Składanie & Testy", text: "Szukasz pomocy przy konfiguracji zestawu?" },
-            { cat: "// Homelab & Sieci", text: "Masz pytanie o serwer lub sieć?" },
+            { cat: "// Składanie Zestawu", text: "Zastanawiasz się jaki procesor lub GPU wybrać?" },
+            { cat: "// Kompatybilność", text: "Masz pytanie odnośnie płyty głównej i pamięci RAM?" },
+            { cat: "// Wydajność w Grach", text: "Szukasz zestawu pod konkretny budżet i gry?" },
             { cat: "// Szybki Kontakt", text: "Napisz do nas bezpośrednio na WhatsApp!" }
         ];
 
@@ -403,10 +404,11 @@
                 bubbleTextEl.textContent = bubbleData[currentBubbleIndex].text;
                 waBubble.style.opacity = '1';
                 waBubble.style.transform = 'translateY(0)';
-            }, 300);
+            }, 400);
         }
 
-        setInterval(rotateBubble, 5000);
+        // Zmiana co 7 sekund (wygodny, spokojny czas do przeczytania)
+        setInterval(rotateBubble, 7000);
 
         // OBSŁUGA OTWIERANIA CZATU
         const waToggleBtn = document.getElementById('waToggleBtn');
