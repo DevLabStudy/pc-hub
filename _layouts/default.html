@@ -119,6 +119,159 @@
             flex-wrap: wrap;
         }
 
+        /* FLOATING WHATSAPP WIDGET & BUBBLE STYLES */
+        .wa-widget-wrapper {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            z-index: 9998;
+            font-family: var(--font-sans);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .wa-rotating-bubble {
+            background: rgba(15, 15, 20, 0.95);
+            border: 1px solid rgba(255, 153, 0, 0.35);
+            color: var(--text-main);
+            padding: 10px 15px;
+            border-radius: 12px;
+            font-size: 0.8rem;
+            font-family: var(--font-mono);
+            box-shadow: 0 5px 25px rgba(0, 0, 0, 0.7);
+            max-width: 240px;
+            text-align: right;
+            cursor: pointer;
+            transition: opacity 0.3s ease, transform 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .wa-rotating-bubble span {
+            color: var(--accent-orange);
+            display: block;
+            font-size: 0.65rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 2px;
+        }
+
+        .wa-float-btn {
+            width: 54px;
+            height: 54px;
+            background-color: #25d366;
+            color: #fff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 18px rgba(37, 211, 102, 0.45);
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border: none;
+            flex-shrink: 0;
+        }
+
+        .wa-float-btn:hover {
+            transform: scale(1.08);
+            box-shadow: 0 6px 22px rgba(37, 211, 102, 0.65);
+        }
+
+        .wa-float-btn svg { width: 28px; height: 28px; fill: #fff; }
+
+        .wa-chat-box {
+            display: none;
+            position: absolute;
+            bottom: 68px;
+            right: 0;
+            width: 310px;
+            background: #0f0f14;
+            border: 1px solid rgba(255, 153, 0, 0.3);
+            border-radius: 14px;
+            box-shadow: 0 10px 35px rgba(0, 0, 0, 0.85);
+            overflow: hidden;
+            flex-direction: column;
+            animation: waFadeIn 0.25s ease-out;
+        }
+
+        @keyframes waFadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .wa-chat-header {
+            background: #050507;
+            padding: 14px 16px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .wa-avatar-status { position: relative; }
+
+        .wa-avatar {
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            background: var(--accent-orange);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 900;
+            color: #0a0a0c;
+            font-family: var(--font-mono);
+            font-size: 0.85rem;
+        }
+
+        .wa-online-dot {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 10px;
+            height: 10px;
+            background: #22c55e;
+            border-radius: 50%;
+            border: 2px solid #050507;
+        }
+
+        .wa-chat-header-info h4 { color: #fff; font-size: 0.85rem; margin: 0; font-family: var(--font-mono); }
+        .wa-chat-header-info p { color: var(--text-muted); font-size: 0.72rem; margin: 0; }
+        .wa-chat-body { padding: 16px; background: rgba(10, 10, 12, 0.95); }
+
+        .wa-msg-bubble {
+            background: rgba(255, 153, 0, 0.08);
+            border: 1px solid rgba(255, 153, 0, 0.2);
+            color: var(--text-main);
+            padding: 10px 12px;
+            border-radius: 8px;
+            font-size: 0.82rem;
+            line-height: 1.45;
+            margin-bottom: 14px;
+        }
+
+        .wa-start-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            background: #25d366;
+            color: #0a0a0c;
+            text-decoration: none;
+            font-weight: 800;
+            font-family: var(--font-mono);
+            font-size: 0.78rem;
+            padding: 10px;
+            border-radius: 6px;
+            text-transform: uppercase;
+            transition: 0.2s;
+        }
+
+        .wa-start-btn:hover {
+            background: #20bd5a;
+            box-shadow: 0 0 15px rgba(37, 211, 102, 0.4);
+        }
+
         /* MOBILE RESPONSIVE ADAPTATION */
         @media (max-width: 768px) {
             main {
@@ -136,6 +289,19 @@
                 right: 10px;
                 padding: 16px;
             }
+
+            .wa-rotating-bubble {
+                display: none; /* Ukryj dymek na małych ekranach, żeby nie zasłaniał widoku */
+            }
+
+            .wa-widget-wrapper {
+                bottom: 15px;
+                right: 15px;
+            }
+
+            .wa-chat-box {
+                width: 280px;
+            }
         }
     </style>
 
@@ -148,6 +314,43 @@
     <main>
         {{ content }}
     </main>
+
+    <!-- PŁYWAJĄcy WIDGET WHATSAPP Z ZMIENNYMI PYTANIAMI -->
+    <div class="wa-widget-wrapper">
+        <div class="wa-rotating-bubble" id="waBubble" title="Kliknij, aby zapytać">
+            <span id="waBubbleCategory">// PCHub Support</span>
+            <span id="waBubbleText">Potrzebujesz porady w doborze części?</span>
+        </div>
+
+        <div class="wa-chat-box" id="waChatBox">
+            <div class="wa-chat-header">
+                <div class="wa-avatar-status">
+                    <div class="wa-avatar">PC</div>
+                    <div class="wa-online-dot"></div>
+                </div>
+                <div class="wa-chat-header-info">
+                    <h4>PCHub &amp; Homelab</h4>
+                    <p>Doradztwo PC i sprzęt</p>
+                </div>
+            </div>
+            <div class="wa-chat-body">
+                <div class="wa-msg-bubble">
+                    Cześć! Masz pytanie odnośnie konfiguracji PC, podzespołów lub homelabu? Śmiało napisz! 🖥️
+                </div>
+                <a href="https://wa.me/48334454122?text=Cze%C5%9B%C4%87!%20Potrzebuj%C4%99%20porady%20dotycz%C4%85cej%20komputera%20/%20sprz%C4%99tu." 
+                   target="_blank" 
+                   rel="noopener noreferrer" 
+                   class="wa-start-btn">
+                    <svg viewBox="0 0 24 24" style="width: 16px; height: 16px; fill: currentColor;"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981z"/></svg>
+                    Zapytaj o poradę PC
+                </a>
+            </div>
+        </div>
+
+        <button class="wa-float-btn" id="waToggleBtn" aria-label="Otwórz czat WhatsApp">
+            <svg viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981z"/></svg>
+        </button>
+    </div>
 
     <!-- BANNER COOKIES / RODO -->
     <div id="cookieBanner">
@@ -174,8 +377,65 @@
         <p>&copy; {{ 'now' | date: "%Y" }} DevLabStudy &bull; Hardware &amp; Homelab Repository</p>
     </footer>
 
-    <!-- SKRYPT LOGIKI ZGÓD COOKIES -->
+    <!-- SKRYPTY (WHATSAPP, DZYNDZELE & COOKIES) -->
     <script>
+        // ROTUJĄCE PYTANIA W CHMURCE WHATSAPP
+        const bubbleData = [
+            { cat: "// Doradztwo PC", text: "Potrzebujesz porady w doborze części?" },
+            { cat: "// Składanie & Testy", text: "Szukasz pomocy przy konfiguracji zestawu?" },
+            { cat: "// Homelab & Sieci", text: "Masz pytanie o serwer lub sieć?" },
+            { cat: "// Szybki Kontakt", text: "Napisz do nas bezpośrednio na WhatsApp!" }
+        ];
+
+        let currentBubbleIndex = 0;
+        const bubbleCatEl = document.getElementById('waBubbleCategory');
+        const bubbleTextEl = document.getElementById('waBubbleText');
+        const waBubble = document.getElementById('waBubble');
+
+        function rotateBubble() {
+            if (!waBubble) return;
+            waBubble.style.opacity = '0';
+            waBubble.style.transform = 'translateY(4px)';
+            
+            setTimeout(() => {
+                currentBubbleIndex = (currentBubbleIndex + 1) % bubbleData.length;
+                bubbleCatEl.textContent = bubbleData[currentBubbleIndex].cat;
+                bubbleTextEl.textContent = bubbleData[currentBubbleIndex].text;
+                waBubble.style.opacity = '1';
+                waBubble.style.transform = 'translateY(0)';
+            }, 300);
+        }
+
+        setInterval(rotateBubble, 5000);
+
+        // OBSŁUGA OTWIERANIA CZATU
+        const waToggleBtn = document.getElementById('waToggleBtn');
+        const waChatBox = document.getElementById('waChatBox');
+
+        if (waToggleBtn && waChatBox) {
+            waToggleBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                const isOpen = waChatBox.style.display === 'flex';
+                waChatBox.style.display = isOpen ? 'none' : 'flex';
+                if (waBubble) waBubble.style.display = isOpen ? 'block' : 'none';
+            });
+
+            if (waBubble) {
+                waBubble.addEventListener('click', () => {
+                    waChatBox.style.display = 'flex';
+                    waBubble.style.display = 'none';
+                });
+            }
+
+            document.addEventListener('click', (e) => {
+                if (!waChatBox.contains(e.target) && e.target !== waToggleBtn && e.target !== waBubble) {
+                    waChatBox.style.display = 'none';
+                    if (waBubble) waBubble.style.display = 'block';
+                }
+            });
+        }
+
+        // LOGIKA ZGÓD COOKIES
         const cookieBanner = document.getElementById('cookieBanner');
         const btnAcceptAll = document.getElementById('btnAcceptAll');
         const btnRejectAll = document.getElementById('btnRejectAll');
