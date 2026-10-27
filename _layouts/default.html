@@ -2,124 +2,61 @@
 <html lang="pl">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
-    <title>{% if page.title %}{{ page.title }}{% else %}DevLabStudy | PCHub{% endif %}</title>
-    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>{{ page.title | default: "PC Hub | Hardware & Custom Assembly" }}</title>
+
     <!-- Google tag (gtag.js) - Google Analytics z Consent Mode v2 -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-V0CPE4RVED"></script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-T0FHCPTREP"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
 
-      // Domyślna blokada śledzenia analitycznego przed decyzją użytkownika
+      // Domyślna blokada śledzenia analitycznego przed wyborem użytkownika
       gtag('consent', 'default', {
         'analytics_storage': 'denied'
       });
 
       gtag('js', new Date());
-      gtag('config', 'G-V0CPE4RVED');
+      gtag('config', 'G-T0FHCPTREP');
     </script>
-
-    <!-- FAVICON Z ASSETS/IMG/LOGO.PNG -->
-    <link rel="icon" type="image/png" href="/assets/img/logo.png">
-    <link rel="shortcut icon" type="image/png" href="/assets/img/logo.png">
-    <link rel="apple-touch-icon" href="/assets/img/logo.png">
-
-    <!-- CZCIONKI -->
-    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700;800;900&family=Inter:wght@300;400;600;700;800;900&display=swap" rel="stylesheet">
     
+    <!-- Favicona PC Hub -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23ff5e00' stroke-width='2.5'><rect x='2' y='2' width='20' height='20' rx='3'/><path d='M12 6v12M6 12h12'/></svg>">
+    
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700;800&family=Inter:wght@300;400;500;600;800;900&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg-base: #0a0a0c;
+            --bg-base: #030305;
+            --bg-card: rgba(8, 12, 20, 0.95);
+            --border-subtle: rgba(255, 94, 0, 0.15);
+            --border-blue: rgba(0, 210, 255, 0.2);
+            --accent-orange: #ff5e00;
+            --accent-blue: #00d2ff;
             --text-main: #f1f5f9;
             --text-muted: #8b9bb4;
-            --accent-orange: #ff9900;
-            --border-subtle: #2a2a2a;
             --font-mono: 'JetBrains Mono', monospace;
             --font-sans: 'Inter', sans-serif;
         }
 
-        * { box-sizing: border-box; margin: 0; padding: 0; }
-
-        html, body {
-            overflow-x: hidden;
-            width: 100%;
-        }
+        * { box-sizing: border-box; margin: 0; padding: 0; scroll-behavior: smooth; }
 
         body {
             background-color: var(--bg-base);
+            background-image: 
+                radial-gradient(circle at 10% 10%, rgba(255, 94, 0, 0.03) 0%, transparent 40%),
+                radial-gradient(circle at 90% 90%, rgba(0, 210, 255, 0.03) 0%, transparent 40%);
             color: var(--text-main);
             font-family: var(--font-sans);
+            overflow-x: hidden;
             line-height: 1.6;
             min-height: 100vh;
             display: flex;
             flex-direction: column;
         }
 
-        main {
-            flex: 1;
-            width: 100%;
-            max-width: 1250px;
-            margin: 0 auto;
-            padding: 2rem 1.5rem;
-        }
+        main { flex: 1; }
 
-        footer {
-            border-top: 1px solid var(--border-subtle);
-            padding: 2rem 1.5rem;
-            text-align: center;
-            font-family: var(--font-mono);
-            font-size: 0.75rem;
-            color: var(--text-muted);
-            background: #050507;
-            margin-top: auto;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 0.8rem;
-        }
-
-        .footer-links {
-            display: flex;
-            gap: 1.2rem;
-            justify-content: center;
-            flex-wrap: wrap;
-        }
-
-        .footer-links a {
-            color: var(--accent-orange);
-            text-decoration: none;
-            cursor: pointer;
-            transition: opacity 0.2s ease;
-        }
-
-        .footer-links a:hover {
-            opacity: 0.85;
-            text-decoration: underline;
-        }
-
-        /* STYL BANERU COOKIES / RODO FOR PC HUB */
-        #cookieBanner {
-            display: none;
-            position: fixed;
-            bottom: 20px;
-            left: 20px;
-            right: 20px;
-            max-width: 720px;
-            margin: 0 auto;
-            background: rgba(10, 10, 12, 0.97);
-            border: 1px solid var(--border-subtle);
-            backdrop-filter: blur(16px);
-            padding: 22px 26px;
-            border-radius: 12px;
-            z-index: 9999;
-            box-shadow: 0 15px 45px rgba(0,0,0,0.85);
-            align-items: center;
-            gap: 20px;
-            flex-wrap: wrap;
-        }
-
-        /* FLOATING WHATSAPP WIDGET & BUBBLE STYLES */
+        /* FLOATING WHATSAPP CHAT WIDGET & ROTATING BUBBLE */
         .wa-widget-wrapper {
             position: fixed;
             bottom: 25px;
@@ -132,15 +69,15 @@
         }
 
         .wa-rotating-bubble {
-            background: rgba(15, 15, 20, 0.95);
-            border: 1px solid rgba(255, 153, 0, 0.35);
+            background: rgba(10, 15, 25, 0.95);
+            border: 1px solid rgba(255, 94, 0, 0.35);
             color: var(--text-main);
             padding: 10px 15px;
             border-radius: 12px;
             font-size: 0.8rem;
             font-family: var(--font-mono);
             box-shadow: 0 5px 25px rgba(0, 0, 0, 0.7);
-            max-width: 260px;
+            max-width: 270px;
             text-align: right;
             cursor: pointer;
             transition: opacity 0.4s ease, transform 0.4s ease;
@@ -185,8 +122,8 @@
             bottom: 68px;
             right: 0;
             width: 310px;
-            background: #0f0f14;
-            border: 1px solid rgba(255, 153, 0, 0.3);
+            background: #080c14;
+            border: 1px solid rgba(255, 94, 0, 0.25);
             border-radius: 14px;
             box-shadow: 0 10px 35px rgba(0, 0, 0, 0.85);
             overflow: hidden;
@@ -200,7 +137,7 @@
         }
 
         .wa-chat-header {
-            background: #050507;
+            background: #0b1320;
             padding: 14px 16px;
             display: flex;
             align-items: center;
@@ -218,8 +155,8 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            font-weight: 900;
-            color: #0a0a0c;
+            font-weight: 800;
+            color: #030305;
             font-family: var(--font-mono);
             font-size: 0.85rem;
         }
@@ -232,16 +169,16 @@
             height: 10px;
             background: #22c55e;
             border-radius: 50%;
-            border: 2px solid #050507;
+            border: 2px solid #0b1320;
         }
 
         .wa-chat-header-info h4 { color: #fff; font-size: 0.85rem; margin: 0; font-family: var(--font-mono); }
         .wa-chat-header-info p { color: var(--text-muted); font-size: 0.72rem; margin: 0; }
-        .wa-chat-body { padding: 16px; background: rgba(10, 10, 12, 0.95); }
+        .wa-chat-body { padding: 16px; background: rgba(3, 3, 5, 0.95); }
 
         .wa-msg-bubble {
-            background: rgba(255, 153, 0, 0.08);
-            border: 1px solid rgba(255, 153, 0, 0.2);
+            background: rgba(255, 94, 0, 0.08);
+            border: 1px solid rgba(255, 94, 0, 0.2);
             color: var(--text-main);
             padding: 10px 12px;
             border-radius: 8px;
@@ -256,7 +193,7 @@
             justify-content: center;
             gap: 8px;
             background: #25d366;
-            color: #0a0a0c;
+            color: #030305;
             text-decoration: none;
             font-weight: 800;
             font-family: var(--font-mono);
@@ -272,42 +209,43 @@
             box-shadow: 0 0 15px rgba(37, 211, 102, 0.4);
         }
 
-        /* MOBILE RESPONSIVE ADAPTATION */
+        /* BANNER COOKIES / RODO (Naprawione: domyślnie ukryte) */
+        #cookieBanner {
+            display: none;
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            right: 20px;
+            max-width: 720px;
+            margin: 0 auto;
+            background: rgba(8, 12, 20, 0.97);
+            border: 1px solid var(--border-subtle);
+            backdrop-filter: blur(16px);
+            padding: 22px 26px;
+            border-radius: 12px;
+            z-index: 9999;
+            box-shadow: 0 15px 45px rgba(0,0,0,0.85);
+            align-items: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        footer {
+            border-top: 1px solid var(--border-subtle); padding: 2rem 1.2rem; text-align: center;
+            font-family: var(--font-mono); font-size: 0.72rem; color: var(--text-muted); background: #010103;
+            display: flex; flex-direction: column; gap: 0.5rem; align-items: center;
+        }
+        .footer-links { display: flex; gap: 1.2rem; justify-content: center; margin-bottom: 0.4rem; flex-wrap: wrap; }
+        .footer-links a { color: var(--accent-orange); text-decoration: none; cursor: pointer; }
+        .footer-links a:hover { text-decoration: underline; }
+
         @media (max-width: 768px) {
-            main {
-                padding: 1.2rem 1rem;
-            }
-
-            footer {
-                padding: 1.5rem 1rem;
-                font-size: 0.7rem;
-            }
-
-            #cookieBanner {
-                bottom: 10px;
-                left: 10px;
-                right: 10px;
-                padding: 16px;
-            }
-
-            .wa-rotating-bubble {
-                display: none;
-            }
-
-            .wa-widget-wrapper {
-                bottom: 15px;
-                right: 15px;
-            }
-
-            .wa-chat-box {
-                width: 280px;
-            }
+            #cookieBanner { bottom: 10px; left: 10px; right: 10px; padding: 16px; }
+            .wa-rotating-bubble { display: none; }
+            .wa-widget-wrapper { bottom: 15px; right: 15px; }
+            .wa-chat-box { width: 280px; }
         }
     </style>
-
-    {% if page.custom_css %}
-        <link rel="stylesheet" href="{{ page.custom_css }}">
-    {% endif %}
 </head>
 <body>
 
@@ -315,11 +253,11 @@
         {{ content }}
     </main>
 
-    <!-- PŁYWAJĄCY WIDGET WHATSAPP Z TEMATYCZNYMI PYTANIAMI PC -->
+    <!-- FLOATING WHATSAPP CHAT WIDGET Z ROTUJĄCYMI PYTANIAMI DLA PC HUB -->
     <div class="wa-widget-wrapper">
-        <div class="wa-rotating-bubble" id="waBubble" title="Kliknij, aby zapytać">
-            <span id="waBubbleCategory">// PCHub Support</span>
-            <span id="waBubbleText">Potrzebujesz porady w doborze części?</span>
+        <div class="wa-rotating-bubble" id="waBubble" title="Kliknij, aby zapytać o sprzęt">
+            <span id="waBubbleCategory">// PC Hub Hardware</span>
+            <span id="waBubbleText">Szukasz wyceny lub składania PC?</span>
         </div>
 
         <div class="wa-chat-box" id="waChatBox">
@@ -329,15 +267,16 @@
                     <div class="wa-online-dot"></div>
                 </div>
                 <div class="wa-chat-header-info">
-                    <h4>PCHub Expert</h4>
-                    <p>Doradztwo PC i podzespoły</p>
+                    <h4>PC Hub Support</h4>
+                    <p>Zwykle odpowiadamy w kilka minut</p>
                 </div>
             </div>
             <div class="wa-chat-body">
                 <div class="wa-msg-bubble">
-                    Cześć! Składasz komputer lub szukasz opinii o podzespołach? Napisz śmiało! 🖥️
+                    Cześć! 👋 W czym pomóc odnośnie sprzętu, modyfikacji lub wyceny PC?
                 </div>
-                <a href="https://wa.me/48334454122?text=Cze%C5%9B%C4%87!%20Potrzebuj%C4%99%20porady%20w%20doborze%20części%20do%20komputera." 
+                <!-- Bezpośredni link z dedykowaną wiadomością wstępną dla etykiety [PC Hub] -->
+                <a href="https://wa.me/48334454122?text=Cze%C5%9B%C4%87!%20Pisze%20z%20podstrony%20PC%20Hub%20-%20chcia%C5%82bym%20zapyta%C4%87%20o%20sprz%C4%99t." 
                    target="_blank" 
                    rel="noopener noreferrer" 
                    class="wa-start-btn">
@@ -357,34 +296,36 @@
         <div style="flex: 1; min-width: 280px;">
             <div style="font-family: var(--font-mono); font-size: 0.75rem; color: var(--accent-orange); text-transform: uppercase; margin-bottom: 6px; font-weight: 700; letter-spacing: 0.5px;">// Prywatność &amp; Pliki Cookies</div>
             <p style="color: var(--text-muted); font-size: 0.82rem; line-height: 1.55; margin: 0; font-family: var(--font-sans);">
-                Serwis PC Hub używa plików cookies niezbędnych do działania strony oraz opcjonalnych ciasteczek Google Analytics w celach statystycznych.
+                Używamy plików cookies w celu zapewnienia prawidłowego działania serwisu oraz analityki ruchu (Google Analytics).
             </p>
         </div>
         
         <div style="display: flex; gap: 8px; flex-wrap: wrap; align-items: center; justify-content: flex-end; width: 100%;">
             <button id="btnAcceptNecessary" style="background: rgba(255,255,255,0.06); color: var(--text-main); border: 1px solid rgba(255,255,255,0.15); padding: 9px 14px; border-radius: 6px; font-family: var(--font-mono); font-size: 0.72rem; font-weight: 700; cursor: pointer; transition: 0.2s;">Wymagane tylko</button>
-            <button id="btnRejectAll" style="background: rgba(255, 153, 0, 0.1); color: var(--accent-orange); border: 1px solid rgba(255, 153, 0, 0.3); padding: 9px 14px; border-radius: 6px; font-family: var(--font-mono); font-size: 0.72rem; font-weight: 700; cursor: pointer; transition: 0.2s;">Odrzuć opcjonalne</button>
-            <button id="btnAcceptAll" style="background: var(--accent-orange); color: #0a0a0c; border: none; padding: 10px 18px; border-radius: 6px; font-family: var(--font-mono); font-weight: 800; font-size: 0.75rem; cursor: pointer; text-transform: uppercase; transition: 0.2s; box-shadow: 0 0 15px rgba(255, 153, 0, 0.3);">Akceptuj wszystkie</button>
+            <button id="btnRejectAll" style="background: rgba(255, 94, 0, 0.1); color: var(--accent-orange); border: 1px solid rgba(255, 94, 0, 0.3); padding: 9px 14px; border-radius: 6px; font-family: var(--font-mono); font-size: 0.72rem; font-weight: 700; cursor: pointer; transition: 0.2s;">Odrzuć opcjonalne</button>
+            <button id="btnAcceptAll" style="background: var(--accent-orange); color: #030305; border: none; padding: 10px 18px; border-radius: 6px; font-family: var(--font-mono); font-weight: 800; font-size: 0.75rem; cursor: pointer; text-transform: uppercase; transition: 0.2s; box-shadow: 0 0 15px rgba(255, 94, 0, 0.3);">Akceptuj wszystkie</button>
         </div>
     </div>
 
+    <!-- STOPKA -->
     <footer>
         <div class="footer-links">
-            <a href="/polityka-prywatnosci-pchub.md" download="polityka-prywatnosci-pchub.md">Polityka Prywatności (.md)</a>
-            <a href="/cookies-pchub.md" download="cookies-pchub.md">Polityka Cookies (.md)</a>
-            <a id="openCookieSettings">// Ustawienia Cookies</a>
+            <a href="/polityka-prywatnosci.html">Polityka Prywatności</a>
+            <a href="/cookies.html">Polityka Cookies</a>
+            <a id="openCookieSettings" style="color: var(--accent-orange); cursor: pointer;">// Ustawienia Cookies</a>
+            <a href="tel:+48334454122" style="color: #25d366;">Tel / WA: +48 33 445 41 22</a>
         </div>
-        <p>&copy; {{ 'now' | date: "%Y" }} DevLabStudy &bull; Hardware &amp; Homelab Repository</p>
+        <p>&copy; 2026 PC Hub &bull; Część ekosystemu projektu <strong>DevLabStudy</strong>. Wszelkie prawa zastrzeżone.</p>
     </footer>
 
-    <!-- SKRYPTY (WHATSAPP, WOLNIEJSZE DYMKI PC & COOKIES) -->
+    <!-- SKRYPTY -->
     <script>
-        // ROZBUDOWANA, WYŁĄCZNIE KOMPUTEROWA LISTA PYTAŃ W CHMURCE (co 7 sekund)
+        // ROTUJĄCE PYTANIA W DYMKU WHATSAPP DLA PC HUB (co 7 sekund)
         const bubbleData = [
-            { cat: "// Doradztwo PC", text: "Potrzebujesz porady w doborze części?" },
-            { cat: "// Składanie Zestawu", text: "Zastanawiasz się jaki procesor lub GPU wybrać?" },
-            { cat: "// Kompatybilność", text: "Masz pytanie odnośnie płyty głównej i pamięci RAM?" },
-            { cat: "// Wydajność w Grach", text: "Szukasz zestawu pod konkretny budżet i gry?" },
+            { cat: "// PC Hub Hardware", text: "Potrzebujesz pomocy ze składaniem PC?" },
+            { cat: "// Testy & Wydajność", text: "Chcesz sprawdzić temperatury i testy?" },
+            { cat: "// Serwis & Części", text: "Szukasz konkretnych podzespołów?" },
+            { cat: "// Projekty / Buildy", text: "Masz pytanie o retro rig lub modyfikację?" },
             { cat: "// Szybki Kontakt", text: "Napisz do nas bezpośrednio na WhatsApp!" }
         ];
 
@@ -400,17 +341,16 @@
             
             setTimeout(() => {
                 currentBubbleIndex = (currentBubbleIndex + 1) % bubbleData.length;
-                bubbleCatEl.textContent = bubbleData[currentBubbleIndex].cat;
-                bubbleTextEl.textContent = bubbleData[currentBubbleIndex].text;
+                if (bubbleCatEl) bubbleCatEl.textContent = bubbleData[currentBubbleIndex].cat;
+                if (bubbleTextEl) bubbleTextEl.textContent = bubbleData[currentBubbleIndex].text;
                 waBubble.style.opacity = '1';
                 waBubble.style.transform = 'translateY(0)';
             }, 400);
         }
 
-        // Zmiana co 7 sekund (wygodny, spokojny czas do przeczytania)
         setInterval(rotateBubble, 7000);
 
-        // OBSŁUGA OTWIERANIA CZATU
+        // WHATSAPP WIDGET & BUBBLE TOGGLE
         const waToggleBtn = document.getElementById('waToggleBtn');
         const waChatBox = document.getElementById('waChatBox');
 
@@ -437,7 +377,7 @@
             });
         }
 
-        // LOGIKA ZGÓD COOKIES
+        // LOGIKA ZARZĄDZANIA COOKIES & GOOGLE CONSENT MODE
         const cookieBanner = document.getElementById('cookieBanner');
         const btnAcceptAll = document.getElementById('btnAcceptAll');
         const btnRejectAll = document.getElementById('btnRejectAll');
